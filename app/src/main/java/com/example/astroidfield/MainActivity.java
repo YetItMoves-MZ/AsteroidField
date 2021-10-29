@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    //TODO: change buttons to look prettier
+    //TODO: change buttons to look prettier.
     final int DELAY = 500;
     final int NUMBER_OF_LANES = 3;
     final int PLAYER_LAYER = 5;
