@@ -4,8 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/space">
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/IMG_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/space_rotated" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +29,7 @@
             android:layout_weight="1.25"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_heart"/>
+            android:src="@drawable/ic_heart"/>
         <ImageView
             android:id="@+id/life2"
             android:layout_width="0dp"
@@ -31,7 +37,7 @@
             android:layout_weight="1.25"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_heart"/>
+            android:src="@drawable/ic_heart"/>
         <ImageView
             android:id="@+id/life3"
             android:layout_width="0dp"
@@ -39,7 +45,7 @@
             android:layout_weight="1.25"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_heart"/>
+            android:src="@drawable/ic_heart"/>
         <TextView
             android:id="@+id/points"
             android:layout_width="0dp"
@@ -61,251 +67,192 @@
             android:text="Time: 00:00:00"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/asteroidsLayout1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
         android:orientation="horizontal"
         android:baselineAligned="false">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+
 
             <ImageView
-                android:id="@+id/panel_IMG_asteroid11"
+                android:id="@+id/panel_IMG_tile11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid12"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid13"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/asteroidsLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid21"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid22"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid23"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/asteroidsLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid31"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid32"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid33"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/asteroidsLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid41"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid42"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid43"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180" />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/asteroidsLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid51"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid52"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_asteroid53"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:rotation="180"
-                />
-        </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/playerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
 
             <ImageView
-                android:id="@+id/panel_IMG_player1"
+                android:id="@+id/panel_IMG_tile12"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:rotation="180"
-                android:src="@drawable/player"
-                android:visibility="invisible"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
             <ImageView
-                android:id="@+id/panel_IMG_player2"
+                android:id="@+id/panel_IMG_tile13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/player"
-                android:rotation="180"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10">
-            <ImageView
-                android:id="@+id/panel_IMG_player3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/player"
-                android:rotation="180"
-                android:visibility="invisible"/>
-        </LinearLayout>
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile21"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile22"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile23"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile31"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile32"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile33"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+
+        <ImageView
+            android:id="@+id/panel_IMG_tile41"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:rotation="180"></ImageView>
+
+        <ImageView
+            android:id="@+id/panel_IMG_tile42"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:rotation="180"></ImageView>
+
+        <ImageView
+            android:id="@+id/panel_IMG_tile43"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:rotation="180"></ImageView>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile51"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile52"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile53"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile61"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile62"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+            <ImageView
+                android:id="@+id/panel_IMG_tile63"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:rotation="180"></ImageView>
+
+        </LinearLayout>
+
+
     <LinearLayout
         android:id="@+id/buttonsLayout"
         android:layout_width="match_parent"

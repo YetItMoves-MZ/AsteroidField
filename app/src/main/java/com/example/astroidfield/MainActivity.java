@@ -14,8 +14,10 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+    //TODO: make a video explaining what to do using phone recorder
     //TODO: change buttons to look prettier.
     //TODO: implement player movement.
+    //TODO: change player img rotated 180
     final int DELAY = 500;
     final int NUMBER_OF_LANES = 3;
     final int PLAYER_LAYER = 5; // also known as last layer
