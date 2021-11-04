@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/space_rotated" />
+        android:src="@drawable/space" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -55,6 +55,7 @@
             android:layout_marginTop="15dp"
             android:textSize="18sp"
             android:visibility="invisible"
+            android:textColor="@color/white"
             android:text="Points: 0000"/>
         <TextView
             android:id="@+id/timer"
@@ -64,6 +65,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:textSize="18sp"
+            android:textColor="@color/white"
             android:text="Time: 00:00:00"/>
     </LinearLayout>
     <LinearLayout
@@ -78,22 +80,19 @@
                 android:id="@+id/panel_IMG_tile11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile12"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile13"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
     </LinearLayout>
 
@@ -109,22 +108,19 @@
                 android:id="@+id/panel_IMG_tile21"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile22"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile23"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
         </LinearLayout>
 
@@ -140,22 +136,19 @@
                 android:id="@+id/panel_IMG_tile31"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile32"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile33"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
         </LinearLayout>
 
@@ -171,22 +164,19 @@
             android:id="@+id/panel_IMG_tile41"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:rotation="180"></ImageView>
+            android:layout_weight="1"></ImageView>
 
         <ImageView
             android:id="@+id/panel_IMG_tile42"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:rotation="180"></ImageView>
+            android:layout_weight="1"></ImageView>
 
         <ImageView
             android:id="@+id/panel_IMG_tile43"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:rotation="180"></ImageView>
+            android:layout_weight="1"></ImageView>
 
     </LinearLayout>
 
@@ -202,22 +192,19 @@
                 android:id="@+id/panel_IMG_tile51"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile52"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile53"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
         </LinearLayout>
 
@@ -233,22 +220,19 @@
                 android:id="@+id/panel_IMG_tile61"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile62"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
             <ImageView
                 android:id="@+id/panel_IMG_tile63"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:rotation="180"></ImageView>
+                android:layout_weight="1"></ImageView>
 
         </LinearLayout>
 
@@ -259,29 +243,26 @@
         android:layout_height="0dp"
         android:layout_weight="8">
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonLeft"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/round_button"
-            android:text="←"
-            android:textSize="30sp"/>
+            android:layout_weight="2"
+            android:background="@drawable/left_button"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="10"/>
+            android:layout_weight="5"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/buttonRight"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/round_button"
-            android:text="→"
-            android:textSize="30sp"
-            ></Button>
+            android:layout_weight="2"
+            android:background="@drawable/right_button"
+            tools:ignore="SpeakableTextPresentCheck"></ImageButton>
 
     </LinearLayout>
     </LinearLayout>
