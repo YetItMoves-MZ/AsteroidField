@@ -18,6 +18,22 @@ import android.widget.Toast;
 
 import java.util.Random;
 
+
+
+/*
+What needs to be done:
+TODO: icon
+TODO: crash sound and crates sounds
+TODO: crates that gives points
+TODO: menu with options:
+    TODO: change mode from 2 bottons to tilt modes
+    TODO: change base speed fast/slow
+    TODO: sound volume
+    TODO: change player skin
+TODO: tilt mode (no buttons but can move left and right up and down instead)
+TODO: score screen + save scores
+TODO: change from timer to Odometer (Distance counter)
+ */
 public class MainActivity extends AppCompatActivity {
     Game g;
 
@@ -73,27 +89,51 @@ public class MainActivity extends AppCompatActivity {
         g.setTiles(new Tile[][]{{
                 new Tile( findViewById(R.id.panel_IMG_tile11), Tile.EMPTY),
                 new Tile( findViewById(R.id.panel_IMG_tile12), Tile.EMPTY),
-                new Tile( findViewById(R.id.panel_IMG_tile13), Tile.EMPTY)
+                new Tile( findViewById(R.id.panel_IMG_tile13), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile14), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile15), Tile.EMPTY)
         }, {
                 new Tile( findViewById(R.id.panel_IMG_tile21), Tile.EMPTY),
                 new Tile( findViewById(R.id.panel_IMG_tile22), Tile.EMPTY),
-                new Tile( findViewById(R.id.panel_IMG_tile23), Tile.EMPTY)
+                new Tile( findViewById(R.id.panel_IMG_tile23), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile24), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile25), Tile.EMPTY)
         }, {
                 new Tile( findViewById(R.id.panel_IMG_tile31), Tile.EMPTY),
                 new Tile( findViewById(R.id.panel_IMG_tile32), Tile.EMPTY),
-                new Tile( findViewById(R.id.panel_IMG_tile33), Tile.EMPTY)
+                new Tile( findViewById(R.id.panel_IMG_tile33), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile34), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile35), Tile.EMPTY)
         }, {
                 new Tile( findViewById(R.id.panel_IMG_tile41), Tile.EMPTY),
                 new Tile( findViewById(R.id.panel_IMG_tile42), Tile.EMPTY),
-                new Tile( findViewById(R.id.panel_IMG_tile43), Tile.EMPTY)
+                new Tile( findViewById(R.id.panel_IMG_tile43), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile44), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile45), Tile.EMPTY)
         }, {
                 new Tile( findViewById(R.id.panel_IMG_tile51), Tile.EMPTY),
                 new Tile( findViewById(R.id.panel_IMG_tile52), Tile.EMPTY),
-                new Tile( findViewById(R.id.panel_IMG_tile53), Tile.EMPTY)
+                new Tile( findViewById(R.id.panel_IMG_tile53), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile54), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile55), Tile.EMPTY)
         }, {
                 new Tile( findViewById(R.id.panel_IMG_tile61), Tile.EMPTY),
                 new Tile( findViewById(R.id.panel_IMG_tile62), Tile.EMPTY),
-                new Tile( findViewById(R.id.panel_IMG_tile63), Tile.EMPTY)
+                new Tile( findViewById(R.id.panel_IMG_tile63), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile64), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile65), Tile.EMPTY)
+        }, {
+                new Tile( findViewById(R.id.panel_IMG_tile71), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile72), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile73), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile74), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile75), Tile.EMPTY)
+        }, {
+                new Tile( findViewById(R.id.panel_IMG_tile81), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile82), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile83), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile84), Tile.EMPTY),
+                new Tile( findViewById(R.id.panel_IMG_tile85), Tile.EMPTY)
 
         }});
 

@@ -20,15 +20,11 @@ public class Game {
     private ImageView lives[];
     private Tile[][] tiles;
 
-
-
-
-
-
     private final int DELAY = 500;
     private final int MAX_LIVES = 3;
-    private final int NUMBER_OF_LANES = 3;
-    private final int NUMBER_OF_LAYERS= 6; // player layer = NUMBER_OF_LAYERS -1
+    private final int NUMBER_OF_LANES = 5;
+    private final int NUMBER_OF_LAYERS= 8; // player layer = NUMBER_OF_LAYERS -1
+
     private Vibrator v;
     private MainActivity context;
     private final Handler handler = new Handler();
@@ -146,9 +142,10 @@ public class Game {
             else
                 moveTo = playerLocation + 1;
         }
-        checkHit(tiles[NUMBER_OF_LAYERS-1][playerLocation],tiles[NUMBER_OF_LAYERS-1][moveTo]);
-        tiles[NUMBER_OF_LAYERS-1][playerLocation].setEmpty();
-        tiles[NUMBER_OF_LAYERS-1][moveTo].setPlayer();
+        if(!checkHit(tiles[NUMBER_OF_LAYERS-1][playerLocation],tiles[NUMBER_OF_LAYERS-1][moveTo])) {
+            tiles[NUMBER_OF_LAYERS - 1][playerLocation].setEmpty();
+            tiles[NUMBER_OF_LAYERS - 1][moveTo].setPlayer();
+        }
     }
     private void moveObjects() {
         for(int i=0;i<NUMBER_OF_LANES;i++){//removing all non player objects from player layer
@@ -159,7 +156,9 @@ public class Game {
             for(int j=0;j<NUMBER_OF_LANES;j++){
                 if(tiles[i][j].getKind()!=Tile.EMPTY)
                     if(tiles[i+1][j].getKind()==Tile.PLAYER) {
-                        checkHit(tiles[i][j], tiles[i + 1][j]);
+                        if(checkHit(tiles[i][j], tiles[i + 1][j])){ //if player died
+                            return;
+                        }
                         tiles[i][j].setEmpty();
                     }
                     else {
@@ -177,20 +176,16 @@ public class Game {
         }
         return -1;
     }
-    private void checkHit(Tile hitter, Tile hit){
-
-
-
-
-
-
+    private boolean checkHit(Tile hitter, Tile hit){ //returns true if player died
         if((hitter.getKind() == Tile.ASTEROID && hit.getKind() == Tile.PLAYER) ||
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.ASTEROID)){ // player was hit by asteroid.
-            loseLife();
-
+            return loseLife();
+        }
+        else{
+            return false;
         }
     }
-    private void loseLife(){
+    private boolean loseLife(){ //returns true if player died
 
         vibrate(500);
         currentLives--;
@@ -198,16 +193,15 @@ public class Game {
         if(currentLives==0){
             Toast.makeText(context, "You Lose.", Toast.LENGTH_SHORT).show();
             newGame();
+            return true;
         }
         else{
             Toast.makeText(context, "Ouch", Toast.LENGTH_SHORT).show();
         }
+        return false;
     }
 
     private void increaseTimer() {
-
-
-
         milliseconds+=DELAY/10;
         if(milliseconds>=100){
             milliseconds-=100;
