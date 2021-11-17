@@ -23,7 +23,6 @@ import java.util.Random;
 /*
 What needs to be done:
 TODO: crash sound and crates sounds
-TODO: crates that gives points
 TODO: menu with options:
     TODO: change mode from 2 bottons to tilt modes
     TODO: change base speed fast/slow
@@ -77,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void findViews(){
         g.setTimer(findViewById(R.id.timer));
+        g.setPoints(findViewById(R.id.points));
         g.setButtonLeft(findViewById(R.id.buttonLeft));
         g.setButtonRight(findViewById(R.id.buttonRight));
         g.setLives(new ImageView[]{

@@ -15,7 +15,7 @@ import java.util.Random;
 public class Tile {
     private ImageView img;
     private int kind;
-    public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2;
+    public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2, SUPPLY_CRATE = 3;
 
     public Tile() { }
 
@@ -47,6 +47,12 @@ public class Tile {
     public void setAsteroid(Drawable drawable){
         kind=ASTEROID;
         img.setImageDrawable(drawable);
+        img.setVisibility(View.VISIBLE);
+    }
+
+    public void setSupplyCrate(){
+        kind=SUPPLY_CRATE;
+        img.setImageResource(R.drawable.supply_crate);
         img.setVisibility(View.VISIBLE);
     }
 

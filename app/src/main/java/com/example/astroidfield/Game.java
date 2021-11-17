@@ -1,5 +1,7 @@
 package com.example.astroidfield;
 
+import static java.lang.Math.pow;
+
 import android.os.Build;
 import android.os.Handler;
 import android.os.VibrationEffect;
@@ -10,13 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textview.MaterialTextView;
+
 import java.util.Random;
 
 public class Game {
 
 
     private ImageButton buttonLeft, buttonRight;
-    private TextView timer;
+    private MaterialTextView timer;
+    private MaterialTextView points;
     private ImageView lives[];
     private Tile[][] tiles;
 
@@ -34,6 +39,7 @@ public class Game {
     private boolean easterEgg = false;
     private boolean newAsteroid = true;
     private int milliseconds=0, seconds=0,minutes=0;
+    private int numOfPoints=0;
     private Runnable r = new Runnable() {
         public void run() {
             moveObjects();
@@ -43,18 +49,28 @@ public class Game {
                 tiles[0][newAsteroidLocation].createAsteroid(easterEgg);
                 easterEgg=false; //easter egg happens only once per game
             }
+            else{
+                int newCrateLocation= rand.nextInt(NUMBER_OF_LANES);
+                tiles[0][newCrateLocation].setSupplyCrate();
+            }
             newAsteroid=!newAsteroid;
-            timer.setText("Time: " + minutes + ":"+ seconds + ":" + milliseconds);
+            String minutesStr, secondsStr, millisecondsStr, pointsStr;
+            minutesStr = toStingWithPad(minutes,1);
+            secondsStr = toStingWithPad(seconds,1);
+            millisecondsStr = toStingWithPad(milliseconds,1);
+            pointsStr = toStingWithPad(numOfPoints,3);
+
+            timer.setText("Time: " + minutesStr + ":"+ secondsStr + ":" + millisecondsStr);
+            points.setText("Points: " + pointsStr);
+
             handler.postDelayed(r, DELAY);
         }
     };
-
 
     public Game(){}
     public Game(Vibrator v, MainActivity context) {
         this.v=v;
         this.context=context;
-
     }
 
     public ImageButton getButtonRight() {
@@ -70,9 +86,15 @@ public class Game {
         return r;
     }
 
-    public void setTimer(TextView timer) {
+    public void setTimer(MaterialTextView timer) {
         this.timer = timer;
     }
+
+    public void setPoints(MaterialTextView points) {
+        this.points = points;
+    }
+
+
     public void setButtonRight(ImageButton buttonRight) {
         this.buttonRight = buttonRight;
     }
@@ -86,6 +108,20 @@ public class Game {
         this.buttonLeft = buttonLeft;
     }
 
+    private String toStingWithPad(int num, int numOfPadding){
+        String str=Integer.toString(num);
+
+        for(int i=0;i<numOfPadding;i++){
+            if(num<pow(10,numOfPadding))
+                str="0"+str;
+            num*=10;
+        }
+
+
+
+        return str;
+    }
+
     public  void newGame() {
         cleanBoard();
         tiles[NUMBER_OF_LAYERS-1][NUMBER_OF_LANES/2].setPlayer();
@@ -95,6 +131,7 @@ public class Game {
         milliseconds=0;
         seconds=0;
         minutes=0;
+        numOfPoints=0;
         easterEgg=false;
         newAsteroid = true;
         randomEasterEggTimer = rand.nextInt(300) + 60;
@@ -154,17 +191,27 @@ public class Game {
         }
         for(int i=NUMBER_OF_LAYERS-2;i>=0;i--){ // moving all objects one layer down (except player layer)
             for(int j=0;j<NUMBER_OF_LANES;j++){
-                if(tiles[i][j].getKind()!=Tile.EMPTY)
-                    if(tiles[i+1][j].getKind()==Tile.PLAYER) {
-                        if(checkHit(tiles[i][j], tiles[i + 1][j])){ //if player died
-                            return;
-                        }
-                        tiles[i][j].setEmpty();
+
+                if(tiles[i+1][j].getKind()==Tile.PLAYER){ // if player is about to get hit
+                    if(checkHit(tiles[i][j], tiles[i + 1][j])){ //if player died
+                        return;
                     }
-                    else {
-                        tiles[i + 1][j].setAsteroid(tiles[i][j].getDrawable());
-                        tiles[i][j].setEmpty();
+                }
+                else{
+                    switch(tiles[i][j].getKind()){ // movement
+                        case Tile.ASTEROID:
+                            tiles[i + 1][j].setAsteroid(tiles[i][j].getDrawable());
+                            break;
+
+                        case Tile.SUPPLY_CRATE:
+                            tiles[i + 1][j].setSupplyCrate();
+                            break;
+
+                        default:
+                            break;
                     }
+                }
+                tiles[i][j].setEmpty();
             }
         }
     }
@@ -181,9 +228,12 @@ public class Game {
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.ASTEROID)){ // player was hit by asteroid.
             return loseLife();
         }
-        else{
-            return false;
+        else if((hitter.getKind() == Tile.SUPPLY_CRATE && hit.getKind() == Tile.PLAYER) ||
+                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){
+            numOfPoints++;
         }
+        return false;
+
     }
     private boolean loseLife(){ //returns true if player died
 
