@@ -22,7 +22,6 @@ import java.util.Random;
 
 /*
 What needs to be done:
-TODO: icon
 TODO: crash sound and crates sounds
 TODO: crates that gives points
 TODO: menu with options:
