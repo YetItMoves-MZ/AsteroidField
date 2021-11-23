@@ -23,16 +23,16 @@ import java.util.Random;
 /*
 What needs to be done:
 TODO: crash sound and crates sounds
-TODO: menu with options:
+TODO: menu with options:                                                        from class-5
     TODO: change mode from 2 bottons to tilt modes
     TODO: change base speed fast/slow
     TODO: sound volume
     TODO: change player skin
 TODO: tilt mode (no buttons but can move left and right up and down instead)
-TODO: score screen + save scores
+TODO: score screen + save scores                                                from class-4
 TODO: change from timer to Odometer (Distance counter)
  */
-public class MainActivity extends AppCompatActivity {
+public class Activity_Main extends AppCompatActivity {
     Game g;
 
 

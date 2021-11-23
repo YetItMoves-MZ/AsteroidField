@@ -9,7 +9,6 @@ import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textview.MaterialTextView;
@@ -31,7 +30,7 @@ public class Game {
     private final int NUMBER_OF_LAYERS= 8; // player layer = NUMBER_OF_LAYERS -1
 
     private Vibrator v;
-    private MainActivity context;
+    private Activity_Main context;
     private final Handler handler = new Handler();
     private int currentLives=3;
     private int randomEasterEggTimer;
@@ -68,7 +67,7 @@ public class Game {
     };
 
     public Game(){}
-    public Game(Vibrator v, MainActivity context) {
+    public Game(Vibrator v, Activity_Main context) {
         this.v=v;
         this.context=context;
     }
