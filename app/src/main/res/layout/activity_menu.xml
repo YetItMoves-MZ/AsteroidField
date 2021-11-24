@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity_Menu"
+    android:keepScreenOn="true">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_Leaderboards"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:text="Leaderboards"
+        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_Options"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/menu_BTN_Options"
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Options" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_Exit"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:text="Exit"
+        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_Leaderboards"
+        app:layout_constraintHorizontal_bias="0.637"
+        app:layout_constraintStart_toStartOf="@+id/menu_BTN_Leaderboards"
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Leaderboards" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_Play"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:text="Play"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu_BTN_Options"
+        android:layout_width="160dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:text="Options"
+        app:layout_constraintEnd_toEndOf="@+id/menu_BTN_Play"
+        app:layout_constraintStart_toStartOf="@+id/menu_BTN_Play"
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Play" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

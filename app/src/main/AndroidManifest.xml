@@ -3,6 +3,7 @@
     package="com.example.astroidfield">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AstroidField">
         <activity
-            android:name=".Activity_Main"
+            android:name=".Activity_Game"
+            android:exported="false" />
+        <activity
+            android:name=".Activity_Menu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

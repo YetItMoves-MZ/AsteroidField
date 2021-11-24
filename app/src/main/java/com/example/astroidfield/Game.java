@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.Random;
@@ -19,6 +20,7 @@ public class Game {
 
 
     private ImageButton buttonLeft, buttonRight;
+    private MaterialButton buttonMenu;
     private MaterialTextView timer;
     private MaterialTextView points;
     private ImageView lives[];
@@ -27,10 +29,14 @@ public class Game {
     private final int DELAY = 500;
     private final int MAX_LIVES = 3;
     private final int NUMBER_OF_LANES = 5;
-    private final int NUMBER_OF_LAYERS= 8; // player layer = NUMBER_OF_LAYERS -1
+    private final int NUMBER_OF_LAYERS = 8; // player layer = NUMBER_OF_LAYERS -1
+    private final int ARROW_MODE = 1;
+    private final int TILT_MODE = 2;
 
+
+    private int gameMode = ARROW_MODE;
     private Vibrator v;
-    private Activity_Main context;
+    private Activity_Game context;
     private final Handler handler = new Handler();
     private int currentLives=3;
     private int randomEasterEggTimer;
@@ -67,7 +73,7 @@ public class Game {
     };
 
     public Game(){}
-    public Game(Vibrator v, Activity_Main context) {
+    public Game(Vibrator v, Activity_Game context) {
         this.v=v;
         this.context=context;
     }
@@ -77,6 +83,9 @@ public class Game {
     }
     public ImageButton getButtonLeft() {
         return buttonLeft;
+    }
+    public MaterialButton getButtonMenu() {
+        return buttonMenu;
     }
     public  Handler getHandler() {
         return handler;
@@ -106,6 +115,7 @@ public class Game {
     public void setButtonLeft(ImageButton buttonLeft) {
         this.buttonLeft = buttonLeft;
     }
+    public void setButtonMenu(MaterialButton buttonMenu) { this.buttonMenu = buttonMenu; }
 
     private String toStingWithPad(int num, int numOfPadding){
         String str=Integer.toString(num);

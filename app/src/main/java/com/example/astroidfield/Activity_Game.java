@@ -3,21 +3,10 @@ package com.example.astroidfield;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.Random;
-
 
 
 /*
@@ -32,14 +21,14 @@ TODO: tilt mode (no buttons but can move left and right up and down instead)
 TODO: score screen + save scores                                                from class-4
 TODO: change from timer to Odometer (Distance counter)
  */
-public class Activity_Main extends AppCompatActivity {
+public class Activity_Game extends AppCompatActivity {
     Game g;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_game);
 
         g=new Game((Vibrator) getSystemService(Context.VIBRATOR_SERVICE), this);
         findViews();
@@ -58,6 +47,13 @@ public class Activity_Main extends AppCompatActivity {
                 g.movePlayer(false);
             }
         });
+
+        g.getButtonMenu().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -74,11 +70,12 @@ public class Activity_Main extends AppCompatActivity {
 
 
 
-    public void findViews(){
+    private void findViews(){
         g.setTimer(findViewById(R.id.timer));
         g.setPoints(findViewById(R.id.points));
         g.setButtonLeft(findViewById(R.id.buttonLeft));
         g.setButtonRight(findViewById(R.id.buttonRight));
+        g.setButtonMenu(findViewById(R.id.game_BTN_menu));
         g.setLives(new ImageView[]{
                 findViewById(R.id.life1),
                 findViewById(R.id.life2),
