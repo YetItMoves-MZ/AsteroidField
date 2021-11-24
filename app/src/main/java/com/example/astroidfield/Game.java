@@ -3,6 +3,7 @@ package com.example.astroidfield;
 import static java.lang.Math.pow;
 
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -26,15 +27,28 @@ public class Game {
     private ImageView lives[];
     private Tile[][] tiles;
 
-    private final int DELAY = 500;
+
+    public final float SENSITIVITY = 2;
     private final int MAX_LIVES = 3;
     private final int NUMBER_OF_LANES = 5;
     private final int NUMBER_OF_LAYERS = 8; // player layer = NUMBER_OF_LAYERS -1
-    private final int ARROW_MODE = 1;
-    private final int TILT_MODE = 2;
 
 
-    private int gameMode = ARROW_MODE;
+    //for bundles
+    public static final String MODE = "MODE";
+
+
+
+
+    private boolean tiltMode = false;
+    private boolean tiltModeInitialized = false;
+    private float initializedX;
+    private float initializedY;
+    private float lastViewedX;
+
+
+
+    private int delay = 500;
     private Vibrator v;
     private Activity_Game context;
     private final Handler handler = new Handler();
@@ -68,9 +82,10 @@ public class Game {
             timer.setText("Time: " + minutesStr + ":"+ secondsStr + ":" + millisecondsStr);
             points.setText("Points: " + pointsStr);
 
-            handler.postDelayed(r, DELAY);
+            handler.postDelayed(r, delay);
         }
     };
+
 
     public Game(){}
     public Game(Vibrator v, Activity_Game context) {
@@ -78,6 +93,21 @@ public class Game {
         this.context=context;
     }
 
+    public float getLastViewedX() {
+        return lastViewedX;
+    }
+    public int getDelay() {
+        return delay;
+    }
+    public boolean isTiltModeInitialized() {
+        return tiltModeInitialized;
+    }
+    public float getInitializedX() {
+        return initializedX;
+    }
+    public float getInitializedY() {
+        return initializedY;
+    }
     public ImageButton getButtonRight() {
         return buttonRight;
     }
@@ -93,16 +123,34 @@ public class Game {
     public  Runnable getRunnable() {
         return r;
     }
+    public boolean getTiltMode() {
+        return tiltMode;
+    }
 
+    public void setLastViewedX(float lastViewedX) {
+        this.lastViewedX = lastViewedX;
+    }
+    public void setDelay(int delay) {
+        this.delay = delay;
+    }
+    public void setTiltModeInitialized(boolean tiltModeInitialized) {
+        this.tiltModeInitialized = tiltModeInitialized;
+    }
+    public void setInitializedX(float initializedX) {
+        this.initializedX = initializedX;
+    }
+    public void setInitializedY(float initializedY) {
+        this.initializedY = initializedY;
+    }
     public void setTimer(MaterialTextView timer) {
         this.timer = timer;
     }
-
     public void setPoints(MaterialTextView points) {
         this.points = points;
     }
-
-
+    public void setTiltMode(boolean tiltMode) {
+        this.tiltMode = tiltMode;
+    }
     public void setButtonRight(ImageButton buttonRight) {
         this.buttonRight = buttonRight;
     }
@@ -115,7 +163,9 @@ public class Game {
     public void setButtonLeft(ImageButton buttonLeft) {
         this.buttonLeft = buttonLeft;
     }
-    public void setButtonMenu(MaterialButton buttonMenu) { this.buttonMenu = buttonMenu; }
+    public void setButtonMenu(MaterialButton buttonMenu) {
+        this.buttonMenu = buttonMenu;
+    }
 
     private String toStingWithPad(int num, int numOfPadding){
         String str=Integer.toString(num);
@@ -133,6 +183,10 @@ public class Game {
 
     public  void newGame() {
         cleanBoard();
+        if(tiltMode){
+            buttonLeft.setVisibility(View.INVISIBLE);
+            buttonRight.setVisibility(View.INVISIBLE);
+        }
         tiles[NUMBER_OF_LAYERS-1][NUMBER_OF_LANES/2].setPlayer();
         currentLives=MAX_LIVES;
         for(int i=0;i<currentLives;i++)
@@ -157,7 +211,7 @@ public class Game {
     }
 
     public void startTicker() {
-        getHandler().postDelayed(getRunnable(), DELAY);
+        getHandler().postDelayed(getRunnable(), delay);
     }
     public void stopTicker() {
         getHandler().removeCallbacks(getRunnable());
@@ -261,7 +315,7 @@ public class Game {
     }
 
     private void increaseTimer() {
-        milliseconds+=DELAY/10;
+        milliseconds+= delay /10;
         if(milliseconds>=100){
             milliseconds-=100;
             seconds++;
@@ -273,4 +327,11 @@ public class Game {
         if(randomEasterEggTimer==(minutes*60)+seconds)
             easterEgg=true;
     }
+
+    public void modifyGameByBundle(Bundle b) {
+        if(b!=null) {
+            setTiltMode(b.getBoolean(Game.MODE, false));
+        }
+    }
+
 }

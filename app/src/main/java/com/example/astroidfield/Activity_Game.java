@@ -3,27 +3,21 @@ package com.example.astroidfield;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.ImageView;
 
 
-/*
-What needs to be done:
-TODO: crash sound and crates sounds
-TODO: menu with options:                                                        from class-5
-    TODO: change mode from 2 bottons to tilt modes
-    TODO: change base speed fast/slow
-    TODO: sound volume
-    TODO: change player skin
-TODO: tilt mode (no buttons but can move left and right up and down instead)
-TODO: score screen + save scores                                                from class-4
-TODO: change from timer to Odometer (Distance counter)
- */
 public class Activity_Game extends AppCompatActivity {
-    Game g;
-
+    private Game g;
+    private Bundle b;
+    private SensorManager sensorManager;
+    private Sensor accSensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +26,13 @@ public class Activity_Game extends AppCompatActivity {
 
         g=new Game((Vibrator) getSystemService(Context.VIBRATOR_SERVICE), this);
         findViews();
+
+        initBundle();
+        g.modifyGameByBundle(b);
+        if(g.getTiltMode()){
+            initSensor();
+        }
+
         g.newGame();
 
         g.getButtonLeft().setOnClickListener(new View.OnClickListener() {
@@ -54,18 +55,75 @@ public class Activity_Game extends AppCompatActivity {
                 finish();
             }
         });
+
+
+    }
+
+    private SensorEventListener accSensorEventListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent sensorEvent) {
+            float x = sensorEvent.values[0];
+            float y = sensorEvent.values[1];
+            movementWithTilt(x,y);
+        }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int i) {}
+    };
+
+    private void movementWithTilt(float x, float y) {
+        if (g.isTiltModeInitialized()) {
+            float intervalX = g.getInitializedX()-x;
+            float lastViewedIntervalX = g.getLastViewedX()-x;
+            float intervalY = g.getInitializedY()-y;
+            if(intervalX>g.SENSITIVITY &&  lastViewedIntervalX>g.SENSITIVITY){ //move right
+                g.movePlayer(false);
+                g.setLastViewedX(x);
+            }
+            else if(intervalX<-g.SENSITIVITY && lastViewedIntervalX<-g.SENSITIVITY){ //move left
+                g.movePlayer(true);
+                g.setLastViewedX(x);
+            }
+            else if(lastViewedIntervalX>g.SENSITIVITY || lastViewedIntervalX<-g.SENSITIVITY){ // movement was reset
+                g.setLastViewedX(x);
+            }
+            if(intervalY>g.SENSITIVITY || intervalY<-g.SENSITIVITY){ //make game faster
+                g.setDelay(g.getDelay()-((int)intervalY));
+            }
+        }
+        else{
+            g.setInitializedX(x);
+            g.setInitializedY(y);
+            g.setLastViewedX(x);
+            g.setTiltModeInitialized(true);
+        }
+    }
+
+    private void initSensor() {
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+    }
+
+    private void initBundle() {
+        if(getIntent().hasExtra(Activity_Options.BUNDLE)){
+            b=getIntent().getExtras().getBundle(Activity_Options.BUNDLE);
+        }
+        else b=null;
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         g.startTicker();
+        if(g.getTiltMode())
+            sensorManager.registerListener(accSensorEventListener, accSensor, SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         g.stopTicker();
+        if(g.getTiltMode())
+            sensorManager.unregisterListener(accSensorEventListener);
     }
 
 
