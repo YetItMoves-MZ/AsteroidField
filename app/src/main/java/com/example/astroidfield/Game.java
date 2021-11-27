@@ -59,7 +59,7 @@ public class Game {
     private Random rand = new Random();
     private boolean easterEgg = false;
     private boolean newAsteroid = true;
-    private int milliseconds=0, seconds=0,minutes=0;
+    private int odometer=0;
     private int numOfPoints=0;
     private Runnable r = new Runnable() {
         public void run() {
@@ -75,14 +75,9 @@ public class Game {
                 tiles[0][newCrateLocation].setSupplyCrate();
             }
             newAsteroid=!newAsteroid;
-            String minutesStr, secondsStr, millisecondsStr, pointsStr;
-            minutesStr = toStingWithPad(minutes,1);
-            secondsStr = toStingWithPad(seconds,1);
-            millisecondsStr = toStingWithPad(milliseconds,1);
-            pointsStr = toStingWithPad(numOfPoints,3);
 
-            timer.setText("Time: " + minutesStr + ":"+ secondsStr + ":" + millisecondsStr);
-            points.setText("Points: " + pointsStr);
+            timer.setText("Odometer: " + toStingWithPad(odometer,3));
+            points.setText("Points: " + toStingWithPad(numOfPoints,3));
 
             handler.postDelayed(r, delay);
         }
@@ -193,14 +188,11 @@ public class Game {
         currentLives=MAX_LIVES;
         for(int i=0;i<currentLives;i++)
             lives[i].setVisibility(View.VISIBLE);
-        milliseconds=0;
-        seconds=0;
-        minutes=0;
+        odometer=0;
         numOfPoints=0;
         easterEgg=false;
         newAsteroid = true;
-        randomEasterEggTimer = rand.nextInt(300) + 60;
-        //randomEasterEggTimer = 6; //easier for presentation
+        randomEasterEggTimer = rand.nextInt(250) + 50;
     }
     private void cleanBoard() {
 
@@ -317,16 +309,8 @@ public class Game {
     }
 
     private void increaseTimer() {
-        milliseconds+= delay /10;
-        if(milliseconds>=100){
-            milliseconds-=100;
-            seconds++;
-            if(seconds>=60){
-                seconds-=60;
-                minutes++;
-            }
-        }
-        if(randomEasterEggTimer==(minutes*60)+seconds)
+       odometer++;
+        if(randomEasterEggTimer==odometer)
             easterEgg=true;
     }
 
@@ -335,6 +319,13 @@ public class Game {
             setTiltMode(b.getBoolean(Game.MODE, false));
             Tile.setCurrentPlayerSkin(b.getInt(Game.PLAYER_SKIN));
         }
+        else
+            setDefaultBundle();
+    }
+
+    private void setDefaultBundle() {
+        setTiltMode(false);
+        Tile.setCurrentPlayerSkin(Tile.DEFAULT_PLAYER_SKIN);
     }
 
 }

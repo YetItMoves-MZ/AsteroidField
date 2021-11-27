@@ -129,7 +129,7 @@ public class Activity_Game extends AppCompatActivity {
 
 
     private void findViews(){
-        g.setTimer(findViewById(R.id.timer));
+        g.setTimer(findViewById(R.id.odometer));
         g.setPoints(findViewById(R.id.points));
         g.setButtonLeft(findViewById(R.id.buttonLeft));
         g.setButtonRight(findViewById(R.id.buttonRight));

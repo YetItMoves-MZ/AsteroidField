@@ -50,7 +50,7 @@
             android:id="@+id/points"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_weight="3"
+            android:layout_weight="2.6"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:textSize="18sp"
@@ -58,16 +58,16 @@
             android:autoSizeTextType="uniform"
             android:text="Points: 0000"/>
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/timer"
+            android:id="@+id/odometer"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_weight="3"
+            android:layout_weight="3.2"
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:textSize="18sp"
             android:textColor="@color/white"
             android:autoSizeTextType="uniform"
-            android:text="Time: 00:00:00"/>
+            android:text="Odometer: 0000"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

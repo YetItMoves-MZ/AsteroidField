@@ -22,7 +22,7 @@ public class Tile {
 
     private static int currentPlayerSkin;
     public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2, SUPPLY_CRATE = 3;
-    public static final int DEFAULT_PLAYER_SKIN = R.drawable.player;
+    public static final int DEFAULT_PLAYER_SKIN = 0;
     public static final int PLAYER_SKIN_ARRAY_SIZE = 9;
     public static final int[] PLAYER_SKIN_ARRAY = {
             R.drawable.player,

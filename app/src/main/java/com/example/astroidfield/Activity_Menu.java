@@ -19,7 +19,6 @@ TODO: menu with options:                                                        
     TODO: sound volume
     TODO: change sensitivity for tilt mode
 TODO: score screen + save scores + save options                                 from class-4
-TODO: change from timer to Odometer (Distance counter)
  */
 
 public class Activity_Menu extends AppCompatActivity {
