@@ -28,4 +28,47 @@
         app:layout_constraintStart_toStartOf="@+id/options_BTN_Exit"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/options_IMAGE_player"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/options_BTN_Exit"
+        app:layout_constraintEnd_toEndOf="@+id/options_SWITCH_TiltMode"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/options_SWITCH_TiltMode"
+        app:srcCompat="@drawable/player" />
+
+    <ImageButton
+        android:id="@+id/options_BTN_leftButton"
+        android:layout_width="100dp"
+        android:layout_height="125dp"
+        app:layout_constraintBottom_toBottomOf="@+id/options_IMAGE_player"
+        app:layout_constraintEnd_toStartOf="@+id/options_IMAGE_player"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/options_IMAGE_player"
+        android:background="@drawable/left_button"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/options_BTN_rightButton"
+        android:layout_width="100dp"
+        android:layout_height="125dp"
+        app:layout_constraintBottom_toBottomOf="@+id/options_IMAGE_player"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/options_IMAGE_player"
+        app:layout_constraintTop_toTopOf="@+id/options_IMAGE_player"
+        android:background="@drawable/right_button"
+        tools:ignore="SpeakableTextPresentCheck"  />
+
+    <TextView
+        android:id="@+id/options_TEXT_playerSkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Player Skin"
+        app:layout_constraintBottom_toTopOf="@+id/options_IMAGE_player"
+        app:layout_constraintEnd_toEndOf="@+id/options_IMAGE_player"
+        app:layout_constraintStart_toStartOf="@+id/options_IMAGE_player" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

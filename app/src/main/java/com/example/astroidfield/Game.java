@@ -20,6 +20,7 @@ import java.util.Random;
 public class Game {
 
 
+
     private ImageButton buttonLeft, buttonRight;
     private MaterialButton buttonMenu;
     private MaterialTextView timer;
@@ -36,6 +37,7 @@ public class Game {
 
     //for bundles
     public static final String MODE = "MODE";
+    public static final String PLAYER_SKIN = "PLAYER_SKIN";
 
 
 
@@ -331,6 +333,7 @@ public class Game {
     public void modifyGameByBundle(Bundle b) {
         if(b!=null) {
             setTiltMode(b.getBoolean(Game.MODE, false));
+            Tile.setCurrentPlayerSkin(b.getInt(Game.PLAYER_SKIN));
         }
     }
 

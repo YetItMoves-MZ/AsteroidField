@@ -15,16 +15,39 @@ import java.util.Random;
 public class Tile {
     private ImageView img;
     private int kind;
+
+
+
+
+
+    private static int currentPlayerSkin;
     public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2, SUPPLY_CRATE = 3;
+    public static final int DEFAULT_PLAYER_SKIN = R.drawable.player;
+    public static final int PLAYER_SKIN_ARRAY_SIZE = 9;
+    public static final int[] PLAYER_SKIN_ARRAY = {
+            R.drawable.player,
+            R.drawable.player2,
+            R.drawable.player3,
+            R.drawable.player4,
+            R.drawable.player5,
+            R.drawable.player6,
+            R.drawable.player7,
+            R.drawable.player8,
+            R.drawable.player9
+    };
 
     public Tile() { }
 
     public Tile(ImageView img, int kind) {
         this.img = img;
         this.kind = kind;
+        setCurrentPlayerSkin(DEFAULT_PLAYER_SKIN);
+
     }
 
-
+    public static int getCurrentPlayerSkin() {
+        return currentPlayerSkin;
+    } //TODO: check if needed
     public int getKind() {
         return kind;
     }
@@ -32,10 +55,13 @@ public class Tile {
     public Drawable getDrawable() {
         return img.getDrawable();
     }
+    public static void setCurrentPlayerSkin(int currentPlayerSkin) {
+        Tile.currentPlayerSkin = currentPlayerSkin;
+    }
 
     public void setPlayer(){
         kind=PLAYER;
-        img.setImageResource(R.drawable.player);
+        img.setImageResource(PLAYER_SKIN_ARRAY[currentPlayerSkin]);
         img.setVisibility(View.VISIBLE);
     }
 

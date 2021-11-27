@@ -17,7 +17,6 @@ TODO: crash sound and crates sounds
 TODO: menu with options:                                                        from class-5
     TODO: change base speed fast/slow
     TODO: sound volume
-    TODO: change player skin
     TODO: change sensitivity for tilt mode
 TODO: score screen + save scores + save options                                 from class-4
 TODO: change from timer to Odometer (Distance counter)

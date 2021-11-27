@@ -86,7 +86,7 @@ public class Activity_Game extends AppCompatActivity {
             else if(lastViewedIntervalX>g.SENSITIVITY || lastViewedIntervalX<-g.SENSITIVITY){ // movement was reset
                 g.setLastViewedX(x);
             }
-            if(intervalY>g.SENSITIVITY || intervalY<-g.SENSITIVITY){ //make game faster
+            if(intervalY>g.SENSITIVITY*2 || intervalY<-g.SENSITIVITY*2){ //make game faster
                 g.setDelay(g.getDelay()-((int)intervalY));
             }
         }
