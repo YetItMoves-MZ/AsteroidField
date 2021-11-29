@@ -194,7 +194,7 @@ public class Game {
         easterEgg=false;
         newAsteroid = true;
         randomEasterEggTimer = rand.nextInt(250) + 50;
-        soundSpace = MediaPlayer.create(context, R.drawable.space_space); //TODO: change this
+        soundSpace = MediaPlayer.create(context, R.raw.space_space); //TODO: change location
         soundSpace.start();
     }
     private void cleanBoard() {
