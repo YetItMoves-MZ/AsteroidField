@@ -13,12 +13,12 @@ import com.google.android.material.button.MaterialButton;
 
 /*
 What needs to be done:
-TODO: crash sound and crates sounds
-TODO: menu with options:                                                        from class-5
-    TODO: change base speed fast/slow
-    TODO: sound volume
-    TODO: change sensitivity for tilt mode
-TODO: score screen + save scores + save options                                 from class-4
+TODO: crash sound and crates sounds                                     update 1
+TODO: menu with options:
+    TODO: change base speed fast/slow                                   update 2
+    TODO: sound volume                                                  update 2
+    TODO: change sensitivity for tilt mode                              update 2
+TODO: score screen + save scores + save options                         update 3 from class-4
  */
 
 public class Activity_Menu extends AppCompatActivity {

@@ -2,6 +2,7 @@ package com.example.astroidfield;
 
 import static java.lang.Math.pow;
 
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,7 +21,7 @@ import java.util.Random;
 public class Game {
 
 
-
+    private MediaPlayer soundSpace;
     private ImageButton buttonLeft, buttonRight;
     private MaterialButton buttonMenu;
     private MaterialTextView timer;
@@ -193,6 +194,8 @@ public class Game {
         easterEgg=false;
         newAsteroid = true;
         randomEasterEggTimer = rand.nextInt(250) + 50;
+        soundSpace = MediaPlayer.create(context, R.drawable.space_space); //TODO: change this
+        soundSpace.start();
     }
     private void cleanBoard() {
 
