@@ -71,4 +71,25 @@
         app:layout_constraintEnd_toEndOf="@+id/options_IMAGE_player"
         app:layout_constraintStart_toStartOf="@+id/options_IMAGE_player" />
 
+    <SeekBar
+        android:id="@+id/options_SEEKBAR_background_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:minWidth="300dp"
+        android:maxWidth="300dp"
+        android:progress="50"
+        app:layout_constraintBottom_toTopOf="@+id/options_SWITCH_TiltMode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/options_TEXTVIEW_text_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Music Volume: 50"
+        app:layout_constraintBottom_toTopOf="@+id/options_SEEKBAR_background_volume"
+        app:layout_constraintEnd_toEndOf="@+id/options_SEEKBAR_background_volume"
+        app:layout_constraintStart_toStartOf="@+id/options_SEEKBAR_background_volume" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

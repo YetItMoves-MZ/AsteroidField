@@ -21,7 +21,7 @@ public class Tile {
 
 
     private static int currentPlayerSkin;
-    public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2, SUPPLY_CRATE = 3;
+    public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2, SUPPLY_CRATE = 3, SPACE_SPHERE = 4;
     public static final int DEFAULT_PLAYER_SKIN = 0;
     public static final int PLAYER_SKIN_ARRAY_SIZE = 9;
     public static final int[] PLAYER_SKIN_ARRAY = {
@@ -45,9 +45,6 @@ public class Tile {
 
     }
 
-    public static int getCurrentPlayerSkin() {
-        return currentPlayerSkin;
-    } //TODO: check if needed
     public int getKind() {
         return kind;
     }
@@ -70,8 +67,11 @@ public class Tile {
         img.setVisibility(View.INVISIBLE);
     }
 
-    public void setAsteroid(Drawable drawable){
-        kind=ASTEROID;
+    public void setAsteroid(Drawable drawable, boolean isEaster){
+        if(isEaster)
+            kind = SPACE_SPHERE;
+        else
+            kind=ASTEROID;
         img.setImageDrawable(drawable);
         img.setVisibility(View.VISIBLE);
     }
@@ -85,6 +85,7 @@ public class Tile {
     public void createAsteroid(boolean easterEgg) {
         if(easterEgg){
             img.setImageResource(R.drawable.space_sphere);
+            this.kind = SPACE_SPHERE;
         }
         else{
             Random rnd = new Random();
@@ -102,10 +103,8 @@ public class Tile {
                     img.setImageResource(R.drawable.space_meteor4);
                     break;
             }
+            this.kind=ASTEROID;
         }
-
-
-        this.kind=ASTEROID;
         img.setVisibility(View.VISIBLE);
     }
 }

@@ -8,8 +8,9 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -20,6 +21,12 @@ public class Activity_Options extends AppCompatActivity {
     //bundle variables
     private boolean gameModeTilt=false;
     private int playerSkinIndex = 0;
+    private int volume = 50;
+
+    //seekBar info
+    int seekBarStep = 1;
+    int seekBarMax = 100;
+    int seekBarMin = 0;
 
     //views
     private Bundle bundle;
@@ -28,6 +35,8 @@ public class Activity_Options extends AppCompatActivity {
     private ImageView currentSkin;
     private ImageButton leftSkinButton;
     private ImageButton rightSkinButton;
+    private SeekBar musicVolume;
+    private TextView musicVolumeText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +51,26 @@ public class Activity_Options extends AppCompatActivity {
                 finish();
             }
         });
+
+        musicVolume.setMax( (seekBarMax - seekBarMin) / seekBarStep);
+        musicVolume.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener()
+                {
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {}
+
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress,
+                                                  boolean fromUser)
+                    {
+                        volume = seekBarMin + (progress * seekBarStep);
+                        musicVolumeText.setText("Music Volume: " + volume);
+                    }
+                }
+        );
 
         tiltMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -89,6 +118,14 @@ public class Activity_Options extends AppCompatActivity {
     private void setBundle() {
         bundle.putInt(Game.PLAYER_SKIN,playerSkinIndex);
         bundle.putBoolean(Game.MODE,gameModeTilt);
+        bundle.putInt(Game.VOLUME, volume);
+    }
+
+    private void startMenu() {
+        Intent myIntent = new Intent(this, Activity_Menu.class);
+        setBundle();
+        myIntent.putExtra(BUNDLE, bundle);
+        startActivity(myIntent);
     }
 
     private void findViews() {
@@ -97,15 +134,8 @@ public class Activity_Options extends AppCompatActivity {
         currentSkin = findViewById(R.id.options_IMAGE_player);
         buttonExit = findViewById(R.id.options_BTN_Exit);
         tiltMode = findViewById(R.id.options_SWITCH_TiltMode);
-
-
-    }
-
-    private void startMenu() {
-        Intent myIntent = new Intent(this, Activity_Menu.class);
-        setBundle();
-        myIntent.putExtra(BUNDLE, bundle);
-        startActivity(myIntent);
+        musicVolume = findViewById(R.id.options_SEEKBAR_background_volume);
+        musicVolumeText = findViewById(R.id.options_TEXTVIEW_text_volume);
     }
 
 }

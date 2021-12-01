@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -25,6 +26,7 @@ public class Activity_Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         g=new Game((Vibrator) getSystemService(Context.VIBRATOR_SERVICE), this);
+
         findViews();
 
         initBundle();
@@ -89,8 +91,8 @@ public class Activity_Game extends AppCompatActivity {
             if(intervalY>g.SENSITIVITY*2){ //make game faster
                 g.setDelay(g.getDelay()-((int)intervalY)*3);
             }
-            else if(intervalY<-g.SENSITIVITY*2){ // make game slower
-                g.setDelay(g.getDelay()-((int)intervalY*6));
+            else if(intervalY<-g.SENSITIVITY*1){ // make game slower
+                g.setDelay(g.getDelay()-((int)intervalY*12));
             }
 
         }
@@ -117,6 +119,7 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        g.onResume();
         g.startTicker();
         if(g.getTiltMode())
             sensorManager.registerListener(accSensorEventListener, accSensor, SensorManager.SENSOR_DELAY_UI);
@@ -125,12 +128,11 @@ public class Activity_Game extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        g.onPause();
         g.stopTicker();
         if(g.getTiltMode())
             sensorManager.unregisterListener(accSensorEventListener);
     }
-
-
 
     private void findViews(){
         g.setTimer(findViewById(R.id.odometer));

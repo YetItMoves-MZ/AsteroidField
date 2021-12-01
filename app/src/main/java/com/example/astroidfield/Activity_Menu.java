@@ -13,10 +13,8 @@ import com.google.android.material.button.MaterialButton;
 
 /*
 What needs to be done:
-TODO: crash sound and crates sounds                                     update 1
-TODO: menu with options:
+menu with options:
     TODO: change base speed fast/slow                                   update 2
-    TODO: sound volume                                                  update 2
     TODO: change sensitivity for tilt mode                              update 2
 TODO: score screen + save scores + save options                         update 3 from class-4
  */

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,7 +22,9 @@ import java.util.Random;
 public class Game {
 
 
-    private MediaPlayer soundSpace;
+
+    private MediaPlayer soundBackgroundMusic;
+    private MediaPlayer inGameSounds;
     private ImageButton buttonLeft, buttonRight;
     private MaterialButton buttonMenu;
     private MaterialTextView timer;
@@ -34,11 +37,17 @@ public class Game {
     private final int MAX_LIVES = 3;
     private final int NUMBER_OF_LANES = 5;
     private final int NUMBER_OF_LAYERS = 8; // player layer = NUMBER_OF_LAYERS -1
+    private final static int MAX_VOLUME = 100;
+    private final int MAX_DELAY = 700;
+    private final int MIN_DELAY = 200;
+    private final int MIN_EASTER_EGG_TIMER = 50;
+    private final int MAX_EASTER_EGG_TIMER = 100;
 
 
     //for bundles
     public static final String MODE = "MODE";
     public static final String PLAYER_SKIN = "PLAYER_SKIN";
+    public static final String VOLUME = "VOLUME";
 
 
 
@@ -62,6 +71,8 @@ public class Game {
     private boolean newAsteroid = true;
     private int odometer=0;
     private int numOfPoints=0;
+    private int backgoundVolume = 50;
+
     private Runnable r = new Runnable() {
         public void run() {
             moveObjects();
@@ -129,7 +140,12 @@ public class Game {
         this.lastViewedX = lastViewedX;
     }
     public void setDelay(int delay) {
-        this.delay = delay;
+        if(delay>MAX_DELAY)
+            this.delay = MAX_DELAY;
+        else if (delay<MIN_DELAY)
+            this.delay = MIN_DELAY;
+        else
+            this.delay = delay;
     }
     public void setTiltModeInitialized(boolean tiltModeInitialized) {
         this.tiltModeInitialized = tiltModeInitialized;
@@ -193,10 +209,10 @@ public class Game {
         numOfPoints=0;
         easterEgg=false;
         newAsteroid = true;
-        randomEasterEggTimer = rand.nextInt(250) + 50;
-        soundSpace = MediaPlayer.create(context, R.raw.space_space); //TODO: change location
-        soundSpace.start();
+        randomEasterEggTimer = rand.nextInt(MAX_EASTER_EGG_TIMER-MIN_EASTER_EGG_TIMER) + MIN_EASTER_EGG_TIMER;
+        createMusic();
     }
+
     private void cleanBoard() {
 
         for(int i=0;i<NUMBER_OF_LAYERS;i++){
@@ -246,8 +262,12 @@ public class Game {
     }
     private void moveObjects() {
         for(int i=0;i<NUMBER_OF_LANES;i++){//removing all non player objects from player layer
-            if(tiles[NUMBER_OF_LAYERS-1][i].getKind()!=Tile.PLAYER)
+            if(tiles[NUMBER_OF_LAYERS-1][i].getKind()!=Tile.PLAYER){
+                if(tiles[NUMBER_OF_LAYERS-1][i].getKind() == Tile.SPACE_SPHERE){
+                    createSoundEffect(R.raw.spaaaaaaaace);
+                }
                 tiles[NUMBER_OF_LAYERS-1][i].setEmpty();
+            }
         }
         for(int i=NUMBER_OF_LAYERS-2;i>=0;i--){ // moving all objects one layer down (except player layer)
             for(int j=0;j<NUMBER_OF_LANES;j++){
@@ -260,7 +280,8 @@ public class Game {
                 else{
                     switch(tiles[i][j].getKind()){ // movement
                         case Tile.ASTEROID:
-                            tiles[i + 1][j].setAsteroid(tiles[i][j].getDrawable());
+                        case Tile.SPACE_SPHERE:
+                            tiles[i + 1][j].setAsteroid(tiles[i][j].getDrawable(), tiles[i][j].getKind()==Tile.SPACE_SPHERE);
                             break;
 
                         case Tile.SUPPLY_CRATE:
@@ -285,12 +306,17 @@ public class Game {
     }
     private boolean checkHit(Tile hitter, Tile hit){ //returns true if player died
         if((hitter.getKind() == Tile.ASTEROID && hit.getKind() == Tile.PLAYER) ||
-                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.ASTEROID)){ // player was hit by asteroid.
+                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.ASTEROID) ||
+                (hitter.getKind() == Tile.SPACE_SPHERE && hit.getKind() == Tile.PLAYER) ||
+                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SPACE_SPHERE)){ // player was hit by asteroid.
+            createSoundEffect(R.raw.hit);
             return loseLife();
         }
         else if((hitter.getKind() == Tile.SUPPLY_CRATE && hit.getKind() == Tile.PLAYER) ||
-                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){
+                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){ // player was hit by crate.
+            createSoundEffect(R.raw.collect);
             numOfPoints++;
+
         }
         return false;
 
@@ -313,14 +339,17 @@ public class Game {
 
     private void increaseTimer() {
        odometer++;
-        if(randomEasterEggTimer==odometer)
+        if(randomEasterEggTimer==odometer){
             easterEgg=true;
+            createSoundEffect(R.raw.space_space);
+        }
     }
 
     public void modifyGameByBundle(Bundle b) {
         if(b!=null) {
             setTiltMode(b.getBoolean(Game.MODE, false));
             Tile.setCurrentPlayerSkin(b.getInt(Game.PLAYER_SKIN));
+            backgoundVolume = b.getInt(Game.VOLUME);
         }
         else
             setDefaultBundle();
@@ -331,4 +360,34 @@ public class Game {
         Tile.setCurrentPlayerSkin(Tile.DEFAULT_PLAYER_SKIN);
     }
 
+    private void createMusic() {
+        if(soundBackgroundMusic==null) {
+            soundBackgroundMusic = MediaPlayer.create(context, R.raw.background_music);
+            float volume = (float) (1 - (Math.log(MAX_VOLUME - backgoundVolume) / Math.log(MAX_VOLUME)));
+            soundBackgroundMusic.setVolume(volume,volume);
+            soundBackgroundMusic.start();
+            soundBackgroundMusic.setLooping(true);
+        }
+        else{
+            soundBackgroundMusic.start();
+        }
+    }
+
+    private void createSoundEffect(int soundEffect){
+        inGameSounds = MediaPlayer.create(context, soundEffect);
+        float volume = (float) (1 - (Math.log(MAX_VOLUME - backgoundVolume) / Math.log(MAX_VOLUME)));
+        inGameSounds.setVolume(volume,volume);
+        inGameSounds.start();
+    }
+
+    //TODO: move everything from activity game to here
+    public void onResume() {
+        if(soundBackgroundMusic!=null) {
+            soundBackgroundMusic.start();
+        }
+    }
+
+    public void onPause() {
+        soundBackgroundMusic.pause();
+    }
 }
