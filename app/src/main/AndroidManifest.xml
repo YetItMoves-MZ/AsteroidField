@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AstroidField">
         <activity
+            android:name=".LeaderboardsMain"
+            android:exported="false" />
+        <activity
+            android:name=".LeaderboardsMap"
+            android:exported="false" />
+        <activity
+            android:name=".LeaderboardsScores"
+            android:exported="false" />
+        <activity
             android:name=".Activity_Options"
             android:exported="false" />
         <activity

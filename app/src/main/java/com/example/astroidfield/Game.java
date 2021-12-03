@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -24,7 +23,9 @@ public class Game {
 
 
     private MediaPlayer soundBackgroundMusic;
-    private MediaPlayer inGameSounds;
+    private MediaPlayer inGameSoundCrash;
+    private MediaPlayer inGameSoundCollect;
+    private MediaPlayer inGameSoundSphere;
     private ImageButton buttonLeft, buttonRight;
     private MaterialButton buttonMenu;
     private MaterialTextView timer;
@@ -264,7 +265,7 @@ public class Game {
         for(int i=0;i<NUMBER_OF_LANES;i++){//removing all non player objects from player layer
             if(tiles[NUMBER_OF_LAYERS-1][i].getKind()!=Tile.PLAYER){
                 if(tiles[NUMBER_OF_LAYERS-1][i].getKind() == Tile.SPACE_SPHERE){
-                    createSoundEffect(R.raw.spaaaaaaaace);
+                    inGameSoundSphere =createSoundEffect(inGameSoundSphere, R.raw.spaaaaaaaace);
                 }
                 tiles[NUMBER_OF_LAYERS-1][i].setEmpty();
             }
@@ -309,12 +310,12 @@ public class Game {
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.ASTEROID) ||
                 (hitter.getKind() == Tile.SPACE_SPHERE && hit.getKind() == Tile.PLAYER) ||
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SPACE_SPHERE)){ // player was hit by asteroid.
-            createSoundEffect(R.raw.hit);
+            inGameSoundCrash = createSoundEffect(inGameSoundCrash, R.raw.hit);
             return loseLife();
         }
         else if((hitter.getKind() == Tile.SUPPLY_CRATE && hit.getKind() == Tile.PLAYER) ||
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){ // player was hit by crate.
-            createSoundEffect(R.raw.collect);
+            inGameSoundCollect = createSoundEffect(inGameSoundCollect, R.raw.collect);
             numOfPoints++;
 
         }
@@ -341,7 +342,7 @@ public class Game {
        odometer++;
         if(randomEasterEggTimer==odometer){
             easterEgg=true;
-            createSoundEffect(R.raw.space_space);
+            inGameSoundSphere = createSoundEffect(inGameSoundSphere, R.raw.space_space);
         }
     }
 
@@ -362,22 +363,20 @@ public class Game {
 
     private void createMusic() {
         if(soundBackgroundMusic==null) {
-            soundBackgroundMusic = MediaPlayer.create(context, R.raw.background_music);
-            float volume = (float) (1 - (Math.log(MAX_VOLUME - backgoundVolume) / Math.log(MAX_VOLUME)));
-            soundBackgroundMusic.setVolume(volume,volume);
-            soundBackgroundMusic.start();
+            soundBackgroundMusic = createSoundEffect(null,R.raw.background_music);
             soundBackgroundMusic.setLooping(true);
-        }
-        else{
-            soundBackgroundMusic.start();
         }
     }
 
-    private void createSoundEffect(int soundEffect){
-        inGameSounds = MediaPlayer.create(context, soundEffect);
+    private MediaPlayer createSoundEffect(MediaPlayer mp, int soundEffect){
+        if(mp!=null){
+            mp.release();
+        }
+        mp = MediaPlayer.create(context, soundEffect);
         float volume = (float) (1 - (Math.log(MAX_VOLUME - backgoundVolume) / Math.log(MAX_VOLUME)));
-        inGameSounds.setVolume(volume,volume);
-        inGameSounds.start();
+        mp.setVolume(volume,volume);
+        mp.start();
+        return mp;
     }
 
     //TODO: move everything from activity game to here

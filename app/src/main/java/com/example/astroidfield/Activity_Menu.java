@@ -45,7 +45,7 @@ public class Activity_Menu extends AppCompatActivity {
         buttonLeaderboards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                comingSoon();
+                startLeaderboards();
 
             }
         });
@@ -72,7 +72,7 @@ public class Activity_Menu extends AppCompatActivity {
         finish();
     }
 
-    private void comingSoon() {
+    private void comingSoon() { //TODO: delete this later
         Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
     }
 
@@ -84,6 +84,13 @@ public class Activity_Menu extends AppCompatActivity {
 
 
 
+    }
+
+    private void startLeaderboards(){
+        Intent myIntent = new Intent(this, LeaderboardsMain.class);
+        if(optionsBundle!=null)
+            myIntent.putExtra(Activity_Options.BUNDLE, optionsBundle);
+        startActivity(myIntent);
     }
 
     private void findViews(){
