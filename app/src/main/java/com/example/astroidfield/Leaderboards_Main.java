@@ -7,7 +7,7 @@ import android.view.View;
 
 import com.google.android.material.button.MaterialButton;
 
-public class LeaderboardsMain extends AppCompatActivity {
+public class Leaderboards_Main extends AppCompatActivity {
 
 
    MaterialButton exitButton;

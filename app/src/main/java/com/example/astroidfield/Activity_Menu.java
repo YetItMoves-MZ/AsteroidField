@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -87,7 +86,7 @@ public class Activity_Menu extends AppCompatActivity {
     }
 
     private void startLeaderboards(){
-        Intent myIntent = new Intent(this, LeaderboardsMain.class);
+        Intent myIntent = new Intent(this, Leaderboards_Main.class);
         if(optionsBundle!=null)
             myIntent.putExtra(Activity_Options.BUNDLE, optionsBundle);
         startActivity(myIntent);

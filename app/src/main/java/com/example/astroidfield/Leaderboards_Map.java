@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class LeaderboardsMap extends AppCompatActivity {
+public class Leaderboards_Map extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

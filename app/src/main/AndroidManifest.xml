@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AstroidField">
         <activity
-            android:name=".LeaderboardsMain"
+            android:name=".Leaderboards_Main"
             android:exported="false" />
         <activity
-            android:name=".LeaderboardsMap"
+            android:name=".Leaderboards_Map"
             android:exported="false" />
         <activity
-            android:name=".LeaderboardsScores"
+            android:name=".Leaderboards_Scores"
             android:exported="false" />
         <activity
             android:name=".Activity_Options"
