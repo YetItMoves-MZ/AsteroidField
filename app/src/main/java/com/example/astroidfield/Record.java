@@ -8,6 +8,7 @@ public class Record {
 
     public Record() {}
 
+
     public long getOdometer() {
         return odometer;
     }
@@ -37,4 +38,10 @@ public class Record {
         this.lon = lon;
         return this;
     }
+
+    public static Record defaultRecord() {
+        Record record = new Record();
+        return record.setLat(0).setLon(0).setOdometer(0).setScore(-1);
+    }
+
 }

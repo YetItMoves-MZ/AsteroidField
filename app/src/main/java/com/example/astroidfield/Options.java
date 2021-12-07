@@ -5,6 +5,11 @@ public class Options {
     private int volume;
     private boolean gameModeTilt;
 
+    //default options
+    private static final boolean GAME_MODE_TILT = false;
+    private static final int PLAYER_SKIN_INDEX = 0;
+    private static final int  VOLUME = 50;
+
     public int getPlayerSkinIndex() {
         return playerSkinIndex;
     }
@@ -23,5 +28,11 @@ public class Options {
     }
     public void setGameModeTilt(boolean gameModeTilt) {
         this.gameModeTilt = gameModeTilt;
+    }
+
+    public void setDefaultOptions() {
+        this.setPlayerSkinIndex(PLAYER_SKIN_INDEX);
+        this.setVolume(VOLUME);
+        this.setGameModeTilt(GAME_MODE_TILT);
     }
 }

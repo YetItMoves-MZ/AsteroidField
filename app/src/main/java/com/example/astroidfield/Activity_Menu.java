@@ -1,13 +1,14 @@
 package com.example.astroidfield;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
 
 
 /*
@@ -26,14 +27,18 @@ public class Activity_Menu extends AppCompatActivity {
     private MaterialButton buttonExit;
     private Bundle optionsBundle;
 
+    private MyDB myDB;
+    private Gson gson;
+    private Options options;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
-        if(getIntent().hasExtra(Activity_Options.BUNDLE)) {
-            optionsBundle = getIntent().getExtras().getBundle(Activity_Options.BUNDLE);
-        }
+        setBundle();
+
+
         buttonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,7 +58,7 @@ public class Activity_Menu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startOptions();
-
+                finish();
             }
         });
 
@@ -68,7 +73,6 @@ public class Activity_Menu extends AppCompatActivity {
     private void startOptions() {
         Intent myIntent = new Intent(this, Activity_Options.class);
         startActivity(myIntent);
-        finish();
     }
 
     private void comingSoon() { //TODO: delete this later
@@ -80,9 +84,6 @@ public class Activity_Menu extends AppCompatActivity {
         if(optionsBundle!=null)
             myIntent.putExtra(Activity_Options.BUNDLE, optionsBundle);
         startActivity(myIntent);
-
-
-
     }
 
     private void startLeaderboards(){
@@ -97,5 +98,23 @@ public class Activity_Menu extends AppCompatActivity {
         buttonLeaderboards = findViewById(R.id.menu_BTN_Leaderboards);
         buttonOptions = findViewById(R.id.menu_BTN_Options);
         buttonExit = findViewById(R.id.menu_BTN_Exit);
+    }
+
+    private void setBundle() {
+        optionsBundle = new Bundle();
+        gson = new Gson();
+        String js = MSPV3.getMe().getString("MY_DB", "");
+        myDB = gson.fromJson(js, MyDB.class);
+        if(myDB == null){ // will only enter on first time opening app
+            myDB = new MyDB();
+            myDB.setDefaultDB();
+            //set json
+            String json = new Gson().toJson(myDB);
+            MSPV3.getMe().putString("MY_DB", json);
+        }
+        options = myDB.getOptions();
+        optionsBundle.putInt(Game.PLAYER_SKIN,options.getPlayerSkinIndex());
+        optionsBundle.putBoolean(Game.MODE,options.isGameModeTilt());
+        optionsBundle.putInt(Game.VOLUME, options.getVolume());
     }
 }

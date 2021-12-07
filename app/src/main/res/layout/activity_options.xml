@@ -76,11 +76,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:minWidth="300dp"
         android:maxWidth="300dp"
+        android:minWidth="300dp"
         android:progress="50"
         app:layout_constraintBottom_toTopOf="@+id/options_SWITCH_TiltMode"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

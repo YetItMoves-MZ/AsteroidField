@@ -1,13 +1,12 @@
 package com.example.astroidfield;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Activity_Game extends AppCompatActivity {
@@ -36,7 +35,6 @@ public class Activity_Game extends AppCompatActivity {
                 }
             });
         }
-
         g.newGame();
 
         g.getButtonLeft().setOnClickListener(new View.OnClickListener() {
@@ -59,10 +57,7 @@ public class Activity_Game extends AppCompatActivity {
                 finish();
             }
         });
-
-
     }
-
 
     private void initBundle() {
         if(getIntent().hasExtra(Activity_Options.BUNDLE)){
@@ -77,7 +72,6 @@ public class Activity_Game extends AppCompatActivity {
         g.onResume();
         g.startTicker();
         if(g.getTiltMode()) {
-            //sensorManager.registerListener(accSensorEventListener, accSensor, SensorManager.SENSOR_DELAY_UI);
             mySensor.resumeSensor();
         }
     }
@@ -88,7 +82,6 @@ public class Activity_Game extends AppCompatActivity {
         g.onPause();
         g.stopTicker();
         if(g.getTiltMode()){
-            //sensorManager.unregisterListener(accSensorEventListener);
             mySensor.pauseSensor();
         }
     }
@@ -158,8 +151,4 @@ public class Activity_Game extends AppCompatActivity {
 
 
     }
-
-
-
-
 }

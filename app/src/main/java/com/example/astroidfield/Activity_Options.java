@@ -1,7 +1,5 @@
 package com.example.astroidfield;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +10,22 @@ import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
+
 
 public class Activity_Options extends AppCompatActivity {
 
     public static final String BUNDLE = "Bundle";
 
+
+
     //bundle variables
-    private boolean gameModeTilt=false;
-    private int playerSkinIndex = 0;
-    private int volume = 50;
+    private boolean gameModeTilt;
+    private int playerSkinIndex;
+    private int volume;
 
     //seekBar info
     int seekBarStep = 1;
@@ -29,7 +33,6 @@ public class Activity_Options extends AppCompatActivity {
     int seekBarMin = 0;
 
     //views
-    private Bundle bundle;
     private Switch tiltMode;
     private MaterialButton buttonExit;
     private ImageView currentSkin;
@@ -37,13 +40,21 @@ public class Activity_Options extends AppCompatActivity {
     private ImageButton rightSkinButton;
     private SeekBar musicVolume;
     private TextView musicVolumeText;
+    private MyDB myDB;
+    private Options options;
+    private Gson gson;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-        bundle = new Bundle();
         findViews();
+        getDatabaseFromJson();
+        setViews();
+
+
         buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +110,23 @@ public class Activity_Options extends AppCompatActivity {
 
     }
 
+    private void setViews() {
+        currentSkin.setImageResource(Tile.PLAYER_SKIN_ARRAY[playerSkinIndex]);
+        tiltMode.setChecked(gameModeTilt);
+        musicVolume.setProgress(volume);
+        musicVolumeText.setText("Music Volume: " + volume);
+    }
+
+    private void getDatabaseFromJson() {
+        gson = new Gson();
+        String js = MSPV3.getMe().getString("MY_DB", "");
+        myDB = gson.fromJson(js, MyDB.class);
+        options = myDB.getOptions();
+        gameModeTilt = options.isGameModeTilt();
+        playerSkinIndex = options.getPlayerSkinIndex();
+        volume = options.getVolume();
+    }
+
     private void setPlayerSkin(boolean pressedLeft) {
         if(pressedLeft){
             playerSkinIndex--;
@@ -115,17 +143,22 @@ public class Activity_Options extends AppCompatActivity {
         currentSkin.setImageResource(Tile.PLAYER_SKIN_ARRAY[playerSkinIndex]);
     }
 
-    private void setBundle() {
-        bundle.putInt(Game.PLAYER_SKIN,playerSkinIndex);
-        bundle.putBoolean(Game.MODE,gameModeTilt);
-        bundle.putInt(Game.VOLUME, volume);
-    }
+
 
     private void startMenu() {
+        setDataBaseToJson();
         Intent myIntent = new Intent(this, Activity_Menu.class);
-        setBundle();
-        myIntent.putExtra(BUNDLE, bundle);
         startActivity(myIntent);
+    }
+
+    private void setDataBaseToJson(){
+        options = new Options();
+        options.setGameModeTilt(gameModeTilt);
+        options.setVolume(volume);
+        options.setPlayerSkinIndex(playerSkinIndex);
+        myDB.setOptions(options);
+        String json = gson.toJson(myDB);
+        MSPV3.getMe().putString("MY_DB", json);
     }
 
     private void findViews() {
