@@ -1,5 +1,7 @@
 package com.example.astroidfield;
 
+import android.os.Bundle;
+
 public class Options {
     private int playerSkinIndex;
     private int volume;
@@ -34,5 +36,13 @@ public class Options {
         this.setPlayerSkinIndex(PLAYER_SKIN_INDEX);
         this.setVolume(VOLUME);
         this.setGameModeTilt(GAME_MODE_TILT);
+    }
+
+    public Bundle createOptionsBundle() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Game.PLAYER_SKIN, playerSkinIndex);
+        bundle.putBoolean(Game.MODE, gameModeTilt);
+        bundle.putInt(Game.VOLUME, volume);
+        return bundle;
     }
 }

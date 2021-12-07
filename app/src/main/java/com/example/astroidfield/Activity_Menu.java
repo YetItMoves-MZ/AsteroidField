@@ -16,7 +16,7 @@ What needs to be done:
 menu with options:
     TODO: change base speed fast/slow                                   update 2
     TODO: change sensitivity for tilt mode                              update 2
-TODO: score screen + save scores + save options                         update 3 from class-4
+TODO: score screen + save scores                                        update 3 from class-4
  */
 
 public class Activity_Menu extends AppCompatActivity {
@@ -101,7 +101,6 @@ public class Activity_Menu extends AppCompatActivity {
     }
 
     private void setBundle() {
-        optionsBundle = new Bundle();
         gson = new Gson();
         String js = MSPV3.getMe().getString("MY_DB", "");
         myDB = gson.fromJson(js, MyDB.class);
@@ -112,9 +111,6 @@ public class Activity_Menu extends AppCompatActivity {
             String json = new Gson().toJson(myDB);
             MSPV3.getMe().putString("MY_DB", json);
         }
-        options = myDB.getOptions();
-        optionsBundle.putInt(Game.PLAYER_SKIN,options.getPlayerSkinIndex());
-        optionsBundle.putBoolean(Game.MODE,options.isGameModeTilt());
-        optionsBundle.putInt(Game.VOLUME, options.getVolume());
+        optionsBundle = myDB.getOptions().createOptionsBundle();
     }
 }
