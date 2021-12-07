@@ -389,4 +389,37 @@ public class Game {
     public void onPause() {
         soundBackgroundMusic.pause();
     }
+
+    public void movementWithTilt(float x, float y) {
+        if (isTiltModeInitialized()) {
+            float intervalX = getInitializedX()-x;
+            float lastViewedIntervalX = getLastViewedX()-x;
+            float intervalY = getInitializedY()-y;
+            if(intervalX>SENSITIVITY &&  lastViewedIntervalX>SENSITIVITY){ //move right
+                movePlayer(false);
+                setLastViewedX(x);
+            }
+            else if(intervalX<-SENSITIVITY && lastViewedIntervalX<-SENSITIVITY){ //move left
+                movePlayer(true);
+                setLastViewedX(x);
+            }
+            else if(lastViewedIntervalX>SENSITIVITY || lastViewedIntervalX<-SENSITIVITY){ // movement was reset
+                setLastViewedX(x);
+            }
+            if(intervalY>SENSITIVITY*2){ //make game faster
+                setDelay(getDelay()-((int)intervalY)*3);
+            }
+            else if(intervalY<-SENSITIVITY*1){ // make game slower
+                setDelay(getDelay()-((int)intervalY*12));
+            }
+
+        }
+        else{
+            setInitializedX(x);
+            setInitializedY(y);
+            setLastViewedX(x);
+            setTiltModeInitialized(true);
+        }
+    }
+
 }

@@ -3,10 +3,6 @@ package com.example.astroidfield;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
@@ -17,8 +13,7 @@ import android.widget.ImageView;
 public class Activity_Game extends AppCompatActivity {
     private Game g;
     private Bundle b;
-    private SensorManager sensorManager;
-    private Sensor accSensor;
+    private MySensor mySensor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +27,14 @@ public class Activity_Game extends AppCompatActivity {
         initBundle();
         g.modifyGameByBundle(b);
         if(g.getTiltMode()){
-            initSensor();
+            mySensor = new MySensor();
+            mySensor.initSensor(this);
+            mySensor.setCallBack_sensors(new CallBack_Sensors() {
+                @Override
+                public void getData(float x, float y) {
+                    g.movementWithTilt(x,y);
+                }
+            });
         }
 
         g.newGame();
@@ -61,53 +63,6 @@ public class Activity_Game extends AppCompatActivity {
 
     }
 
-    private SensorEventListener accSensorEventListener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent sensorEvent) {
-            float x = sensorEvent.values[0];
-            float y = sensorEvent.values[1];
-            movementWithTilt(x,y);
-        }
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int i) {}
-    };
-
-    private void movementWithTilt(float x, float y) {
-        if (g.isTiltModeInitialized()) {
-            float intervalX = g.getInitializedX()-x;
-            float lastViewedIntervalX = g.getLastViewedX()-x;
-            float intervalY = g.getInitializedY()-y;
-            if(intervalX>g.SENSITIVITY &&  lastViewedIntervalX>g.SENSITIVITY){ //move right
-                g.movePlayer(false);
-                g.setLastViewedX(x);
-            }
-            else if(intervalX<-g.SENSITIVITY && lastViewedIntervalX<-g.SENSITIVITY){ //move left
-                g.movePlayer(true);
-                g.setLastViewedX(x);
-            }
-            else if(lastViewedIntervalX>g.SENSITIVITY || lastViewedIntervalX<-g.SENSITIVITY){ // movement was reset
-                g.setLastViewedX(x);
-            }
-            if(intervalY>g.SENSITIVITY*2){ //make game faster
-                g.setDelay(g.getDelay()-((int)intervalY)*3);
-            }
-            else if(intervalY<-g.SENSITIVITY*1){ // make game slower
-                g.setDelay(g.getDelay()-((int)intervalY*12));
-            }
-
-        }
-        else{
-            g.setInitializedX(x);
-            g.setInitializedY(y);
-            g.setLastViewedX(x);
-            g.setTiltModeInitialized(true);
-        }
-    }
-
-    private void initSensor() {
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        accSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-    }
 
     private void initBundle() {
         if(getIntent().hasExtra(Activity_Options.BUNDLE)){
@@ -121,8 +76,10 @@ public class Activity_Game extends AppCompatActivity {
         super.onResume();
         g.onResume();
         g.startTicker();
-        if(g.getTiltMode())
-            sensorManager.registerListener(accSensorEventListener, accSensor, SensorManager.SENSOR_DELAY_UI);
+        if(g.getTiltMode()) {
+            //sensorManager.registerListener(accSensorEventListener, accSensor, SensorManager.SENSOR_DELAY_UI);
+            mySensor.resumeSensor();
+        }
     }
 
     @Override
@@ -130,8 +87,10 @@ public class Activity_Game extends AppCompatActivity {
         super.onPause();
         g.onPause();
         g.stopTicker();
-        if(g.getTiltMode())
-            sensorManager.unregisterListener(accSensorEventListener);
+        if(g.getTiltMode()){
+            //sensorManager.unregisterListener(accSensorEventListener);
+            mySensor.pauseSensor();
+        }
     }
 
     private void findViews(){
