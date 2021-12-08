@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Leaderboards_Score_Fragment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Score"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Traveled"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="0.3"
+                android:visibility="invisible"/>
+
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap3"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap4"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap5"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap6"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap7"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap9"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_name10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_score10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/leaderboards_score_TXT_odometer10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/leaderboards_score_BTN_ShowOnMap10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:text="Button" />
+
+        </TableRow>
+    </TableLayout>
+</FrameLayout>

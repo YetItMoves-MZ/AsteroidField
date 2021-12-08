@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Activity_Game extends AppCompatActivity {
     private Game g;
     private Bundle b;
-    private MySensor mySensor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +25,7 @@ public class Activity_Game extends AppCompatActivity {
 
         initBundle();
         g.modifyGameByBundle(b);
-        if(g.getTiltMode()){
-            mySensor = new MySensor();
-            mySensor.initSensor(this);
-            mySensor.setCallBack_sensors(new CallBack_Sensors() {
-                @Override
-                public void getData(float x, float y) {
-                    g.movementWithTilt(x,y);
-                }
-            });
-        }
+
         g.newGame();
 
         g.getButtonLeft().setOnClickListener(new View.OnClickListener() {
@@ -72,7 +63,7 @@ public class Activity_Game extends AppCompatActivity {
         g.onResume();
         g.startTicker();
         if(g.getTiltMode()) {
-            mySensor.resumeSensor();
+            g.getMySensor().resumeSensor();
         }
     }
 
@@ -82,13 +73,13 @@ public class Activity_Game extends AppCompatActivity {
         g.onPause();
         g.stopTicker();
         if(g.getTiltMode()){
-            mySensor.pauseSensor();
+            g.getMySensor().pauseSensor();
         }
     }
 
     private void findViews(){
         g.setTimer(findViewById(R.id.odometer));
-        g.setPoints(findViewById(R.id.points));
+        g.setScore(findViewById(R.id.points));
         g.setButtonLeft(findViewById(R.id.buttonLeft));
         g.setButtonRight(findViewById(R.id.buttonRight));
         g.setButtonMenu(findViewById(R.id.game_BTN_menu));

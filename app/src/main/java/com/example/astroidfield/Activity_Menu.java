@@ -3,7 +3,6 @@ package com.example.astroidfield;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +15,6 @@ What needs to be done:
 menu with options:
     TODO: change base speed fast/slow                                   update 2
     TODO: change sensitivity for tilt mode                              update 2
-TODO: score screen + save scores                                        update 3 from class-4
  */
 
 public class Activity_Menu extends AppCompatActivity {
@@ -75,10 +73,6 @@ public class Activity_Menu extends AppCompatActivity {
         startActivity(myIntent);
     }
 
-    private void comingSoon() { //TODO: delete this later
-        Toast.makeText(this, "Coming Soon", Toast.LENGTH_SHORT).show();
-    }
-
     private void startGame() {
         Intent myIntent = new Intent(this, Activity_Game.class);
         if(optionsBundle!=null)
@@ -101,16 +95,7 @@ public class Activity_Menu extends AppCompatActivity {
     }
 
     private void setBundle() {
-        gson = new Gson();
-        String js = MSPV3.getMe().getString("MY_DB", "");
-        myDB = gson.fromJson(js, MyDB.class);
-        if(myDB == null){ // will only enter on first time opening app
-            myDB = new MyDB();
-            myDB.setDefaultDB();
-            //set json
-            String json = new Gson().toJson(myDB);
-            MSPV3.getMe().putString("MY_DB", json);
-        }
+        myDB = MyDB.getDB();
         optionsBundle = myDB.getOptions().createOptionsBundle();
     }
 }

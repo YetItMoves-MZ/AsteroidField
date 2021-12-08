@@ -2,13 +2,17 @@ package com.example.astroidfield;
 
 import static java.lang.Math.pow;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 public class Game {
@@ -29,10 +35,10 @@ public class Game {
     private ImageButton buttonLeft, buttonRight;
     private MaterialButton buttonMenu;
     private MaterialTextView timer;
-    private MaterialTextView points;
+    private MaterialTextView score;
     private ImageView lives[];
     private Tile[][] tiles;
-
+    private MySensor mySensor;
 
     public final float SENSITIVITY = 2;
     private final int MAX_LIVES = 3;
@@ -71,8 +77,14 @@ public class Game {
     private boolean easterEgg = false;
     private boolean newAsteroid = true;
     private int odometer=0;
-    private int numOfPoints=0;
+    private int numOfScore =0;
     private int backgoundVolume = 50;
+    private String  name = null;
+    private MyDB myDB =  MyDB.getDB();
+    private ArrayList<Record> records = myDB.getRecords();
+    private int highScoreIndex;
+    double lat=0;
+    double lon=0;
 
     private Runnable r = new Runnable() {
         public void run() {
@@ -90,11 +102,12 @@ public class Game {
             newAsteroid=!newAsteroid;
 
             timer.setText("Odometer: " + toStingWithPad(odometer,3));
-            points.setText("Points: " + toStingWithPad(numOfPoints,3));
+            score.setText("Points: " + toStingWithPad(numOfScore,3));
 
             handler.postDelayed(r, delay);
         }
     };
+
 
 
     public Game(){}
@@ -136,7 +149,13 @@ public class Game {
     public boolean getTiltMode() {
         return tiltMode;
     }
+    public MySensor getMySensor() {
+        return mySensor;
+    }
 
+    public void setMySensor(MySensor mySensor) {
+        this.mySensor = mySensor;
+    }
     public void setLastViewedX(float lastViewedX) {
         this.lastViewedX = lastViewedX;
     }
@@ -160,8 +179,8 @@ public class Game {
     public void setTimer(MaterialTextView timer) {
         this.timer = timer;
     }
-    public void setPoints(MaterialTextView points) {
-        this.points = points;
+    public void setScore(MaterialTextView score) {
+        this.score = score;
     }
     public void setTiltMode(boolean tiltMode) {
         this.tiltMode = tiltMode;
@@ -198,6 +217,16 @@ public class Game {
 
     public  void newGame() {
         cleanBoard();
+        if(getTiltMode()){
+            mySensor = new MySensor();
+            mySensor.initSensor(context);
+            mySensor.setCallBack_sensors(new CallBack_Sensors() {
+                @Override
+                public void getData(float x, float y) {
+                    movementWithTilt(x,y);
+                }
+            });
+        }
         if(tiltMode){
             buttonLeft.setVisibility(View.INVISIBLE);
             buttonRight.setVisibility(View.INVISIBLE);
@@ -207,7 +236,7 @@ public class Game {
         for(int i=0;i<currentLives;i++)
             lives[i].setVisibility(View.VISIBLE);
         odometer=0;
-        numOfPoints=0;
+        numOfScore =0;
         easterEgg=false;
         newAsteroid = true;
         randomEasterEggTimer = rand.nextInt(MAX_EASTER_EGG_TIMER-MIN_EASTER_EGG_TIMER) + MIN_EASTER_EGG_TIMER;
@@ -215,13 +244,11 @@ public class Game {
     }
 
     private void cleanBoard() {
-
         for(int i=0;i<NUMBER_OF_LAYERS;i++){
             for(int j=0;j<NUMBER_OF_LANES;j++){
                 tiles[i][j].setEmpty();
             }
         }
-
     }
 
     public void startTicker() {
@@ -316,7 +343,7 @@ public class Game {
         else if((hitter.getKind() == Tile.SUPPLY_CRATE && hit.getKind() == Tile.PLAYER) ||
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){ // player was hit by crate.
             inGameSoundCollect = createSoundEffect(inGameSoundCollect, R.raw.collect);
-            numOfPoints++;
+            numOfScore++;
 
         }
         return false;
@@ -329,13 +356,74 @@ public class Game {
         lives[currentLives].setVisibility(View.INVISIBLE);
         if(currentLives==0){
             Toast.makeText(context, "You Lose.", Toast.LENGTH_SHORT).show();
-            newGame();
+            if(!checkTopTen()){
+                newGame();
+            }
+            else{//game stop
+                if(tiltMode){
+                    mySensor.pauseSensor();
+                }
+                delay = Integer.MAX_VALUE;
+            }
             return true;
         }
         else{
             Toast.makeText(context, "Ouch", Toast.LENGTH_SHORT).show();
         }
         return false;
+    }
+
+    private boolean checkTopTen() {
+        for(int i=9;i>=0;i--){
+            if(records.get(i).getScore()<numOfScore){
+                getNameFromPlayer();
+                highScoreIndex=i;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void getNameFromPlayer() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("New High Score");
+
+
+        // Set up the input
+        final EditText input = new EditText(context);
+        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        builder.setView(input);
+
+        // Set up the buttons
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                name = input.getText().toString();
+                setNewHighScore(name);
+                context.finish();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                name = "no name given";
+                setNewHighScore(name);
+                dialog.cancel();
+                context.finish();
+            }
+        });
+
+        builder.show();
+    }
+
+    private void setNewHighScore(String name) {
+        //TODO im here.
+        checkForGpsPermission();
+
+        records.set(highScoreIndex,new Record(name,odometer,numOfScore,lat,lon));
+        Collections.sort(records);
+        myDB.setRecords(records);
+        myDB.setDB();
     }
 
     private void increaseTimer() {

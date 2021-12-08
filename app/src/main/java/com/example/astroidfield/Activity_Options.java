@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
 
 
 public class Activity_Options extends AppCompatActivity {
@@ -42,7 +41,6 @@ public class Activity_Options extends AppCompatActivity {
     private TextView musicVolumeText;
     private MyDB myDB;
     private Options options;
-    private Gson gson;
 
 
 
@@ -118,9 +116,7 @@ public class Activity_Options extends AppCompatActivity {
     }
 
     private void getDatabaseFromJson() {
-        gson = new Gson();
-        String js = MSPV3.getMe().getString("MY_DB", "");
-        myDB = gson.fromJson(js, MyDB.class);
+        myDB = MyDB.getDB();
         options = myDB.getOptions();
         gameModeTilt = options.isGameModeTilt();
         playerSkinIndex = options.getPlayerSkinIndex();
@@ -157,8 +153,7 @@ public class Activity_Options extends AppCompatActivity {
         options.setVolume(volume);
         options.setPlayerSkinIndex(playerSkinIndex);
         myDB.setOptions(options);
-        String json = gson.toJson(myDB);
-        MSPV3.getMe().putString("MY_DB", json);
+        myDB.setDB();
     }
 
     private void findViews() {

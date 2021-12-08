@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Leaderboards_Main">
 
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/leaderboards_BTN_back"
         android:layout_width="wrap_content"
@@ -14,5 +15,25 @@
         android:text="back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame2" />
+
+    <FrameLayout
+        android:id="@+id/frame1"
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frame2"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame1">
+
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

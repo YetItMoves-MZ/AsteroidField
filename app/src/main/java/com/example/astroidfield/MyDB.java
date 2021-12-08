@@ -1,5 +1,7 @@
 package com.example.astroidfield;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class MyDB {
@@ -9,6 +11,26 @@ public class MyDB {
     private Options options = new Options();
 
     public MyDB(){}
+
+    public static MyDB getDB() {
+        Gson gson = new Gson();
+        String js = MSPV3.getMe().getString("MY_DB", "");
+        MyDB myDB = gson.fromJson(js, MyDB.class);
+        if(myDB == null){ // will only enter on first time opening app
+            myDB = new MyDB();
+            myDB.setDefaultDB();
+            //set json
+            String json = new Gson().toJson(myDB);
+            MSPV3.getMe().putString("MY_DB", json);
+        }
+        return myDB;
+    }
+
+    public void setDB(){
+        Gson gson = new Gson();
+        String json = gson.toJson(this);
+        MSPV3.getMe().putString("MY_DB", json);
+    }
 
     public ArrayList<Record> getRecords(){
         return records;

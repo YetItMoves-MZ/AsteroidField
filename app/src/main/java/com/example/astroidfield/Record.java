@@ -1,6 +1,9 @@
 package com.example.astroidfield;
 
-public class Record {
+public class Record implements Comparable<Record>{
+
+
+    private String name = "";
     private int odometer = -1;
     private int score = -1;
     private double lat = 0.0;
@@ -8,8 +11,16 @@ public class Record {
 
     public Record() {}
 
+    public Record(String name, int odometer, int score, double lat, double lon){
+        this.name=name;
+        this.odometer=odometer;
+        this.score=score;
+        this.lat=lat;
+        this.lon=lon;
+    }
 
-    public long getOdometer() {
+
+    public int getOdometer() {
         return odometer;
     }
     public int getScore() {
@@ -21,7 +32,14 @@ public class Record {
     public double getLon() {
         return lon;
     }
+    public String getName() {
+        return name;
+    }
 
+    public Record setName(String name) {
+        this.name = name;
+        return this;
+    }
     public Record setOdometer(int odometer) {
         this.odometer = odometer;
         return this;
@@ -41,7 +59,11 @@ public class Record {
 
     public static Record defaultRecord() {
         Record record = new Record();
-        return record.setLat(0).setLon(0).setOdometer(0).setScore(-1);
+        return record.setLat(0).setLon(0).setOdometer(0).setScore(-1).setName("noName");
     }
 
+    @Override
+    public int compareTo(Record record) {
+        return record.getScore()-this.getScore();
+    }
 }
