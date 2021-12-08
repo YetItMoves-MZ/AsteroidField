@@ -7,13 +7,11 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
-import com.google.gson.Gson;
 
 
 /*
 What needs to be done:
 menu with options:
-    TODO: change base speed fast/slow                                   update 2
     TODO: change sensitivity for tilt mode                              update 2
  */
 
@@ -26,8 +24,6 @@ public class Activity_Menu extends AppCompatActivity {
     private Bundle optionsBundle;
 
     private MyDB myDB;
-    private Gson gson;
-    private Options options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

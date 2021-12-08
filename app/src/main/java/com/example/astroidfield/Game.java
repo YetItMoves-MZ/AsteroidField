@@ -2,8 +2,13 @@ package com.example.astroidfield;
 
 import static java.lang.Math.pow;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +21,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
@@ -46,7 +55,7 @@ public class Game {
     private final int NUMBER_OF_LAYERS = 8; // player layer = NUMBER_OF_LAYERS -1
     private final static int MAX_VOLUME = 100;
     private final int MAX_DELAY = 700;
-    private final int MIN_DELAY = 200;
+    private final int MIN_DELAY = 300;
     private final int MIN_EASTER_EGG_TIMER = 50;
     private final int MAX_EASTER_EGG_TIMER = 100;
 
@@ -216,6 +225,8 @@ public class Game {
     }
 
     public  void newGame() {
+        checkForGpsPermission();
+        getGpsFromPlayer();
         cleanBoard();
         if(getTiltMode()){
             mySensor = new MySensor();
@@ -417,13 +428,45 @@ public class Game {
     }
 
     private void setNewHighScore(String name) {
-        //TODO im here.
-        checkForGpsPermission();
-
         records.set(highScoreIndex,new Record(name,odometer,numOfScore,lat,lon));
         Collections.sort(records);
         myDB.setRecords(records);
         myDB.setDB();
+    }
+
+    private void getGpsFromPlayer() {
+        LocationManager locationManager = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
+        boolean gotGPSPermission = !(context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+        if(gotGPSPermission) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+                @Override
+                public void onLocationChanged(@NonNull Location location) {
+                   lon = location.getLongitude();
+                   lat = location.getLatitude();
+                }
+            });
+        }
+    }
+
+    private void checkForGpsPermission() {
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(context,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+            }
+            if (ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(context,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
+            }
+        }
     }
 
     private void increaseTimer() {
