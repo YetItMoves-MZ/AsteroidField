@@ -67,6 +67,9 @@ public class Leaderboards_Score_Fragment extends Fragment {
                 odometers[i].setText(""+record.getOdometer());
                 lons[i] = record.getLon();
                 lats[i] = record.getLat();
+                if(lats[i]==0 && lons[i]==0){
+                    showLocations[i].setVisibility(View.INVISIBLE);
+                }
             }
         }
     }

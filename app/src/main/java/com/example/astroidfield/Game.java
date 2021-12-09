@@ -34,8 +34,6 @@ import java.util.Random;
 
 public class Game {
 
-
-
     private MediaPlayer soundBackgroundMusic;
     private MediaPlayer inGameSoundCrash;
     private MediaPlayer inGameSoundCollect;
@@ -44,7 +42,7 @@ public class Game {
     private MaterialButton buttonMenu;
     private MaterialTextView timer;
     private MaterialTextView score;
-    private ImageView lives[];
+    private ImageView[] lives;
     private Tile[][] tiles;
     private MySensor mySensor;
 
@@ -237,7 +235,8 @@ public class Game {
         numOfScore =0;
         easterEgg=false;
         newAsteroid = true;
-        randomEasterEggTimer = rand.nextInt(MAX_EASTER_EGG_TIMER-MIN_EASTER_EGG_TIMER) + MIN_EASTER_EGG_TIMER;
+        randomEasterEggTimer = rand.nextInt(MAX_EASTER_EGG_TIMER-MIN_EASTER_EGG_TIMER)
+                + MIN_EASTER_EGG_TIMER;
         createMusic();
     }
 
@@ -287,7 +286,8 @@ public class Game {
         }
     }
     private void moveObjects() {
-        for(int i=0;i<NUMBER_OF_LANES;i++){//removing all non player objects from player layer
+        for(int i=0;i<NUMBER_OF_LANES;i++){
+            //removing all non player objects from player layer
             if(tiles[NUMBER_OF_LAYERS-1][i].getKind()!=Tile.PLAYER){
                 if(tiles[NUMBER_OF_LAYERS-1][i].getKind() == Tile.SPACE_SPHERE){
                     inGameSoundSphere =createSoundEffect(inGameSoundSphere, R.raw.spaaaaaaaace);
@@ -295,7 +295,8 @@ public class Game {
                 tiles[NUMBER_OF_LAYERS-1][i].setEmpty();
             }
         }
-        for(int i=NUMBER_OF_LAYERS-2;i>=0;i--){ // moving all objects one layer down (except player layer)
+        for(int i=NUMBER_OF_LAYERS-2;i>=0;i--){
+            // moving all objects one layer down (except player layer)
             for(int j=0;j<NUMBER_OF_LANES;j++){
 
                 if(tiles[i+1][j].getKind()==Tile.PLAYER){ // if player is about to get hit
@@ -307,7 +308,8 @@ public class Game {
                     switch(tiles[i][j].getKind()){ // movement
                         case Tile.ASTEROID:
                         case Tile.SPACE_SPHERE:
-                            tiles[i + 1][j].setAsteroid(tiles[i][j].getDrawable(), tiles[i][j].getKind()==Tile.SPACE_SPHERE);
+                            tiles[i + 1][j].setAsteroid(tiles[i][j].getDrawable(),
+                                    tiles[i][j].getKind()==Tile.SPACE_SPHERE);
                             break;
 
                         case Tile.SUPPLY_CRATE:
@@ -334,12 +336,14 @@ public class Game {
         if((hitter.getKind() == Tile.ASTEROID && hit.getKind() == Tile.PLAYER) ||
                 (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.ASTEROID) ||
                 (hitter.getKind() == Tile.SPACE_SPHERE && hit.getKind() == Tile.PLAYER) ||
-                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SPACE_SPHERE)){ // player was hit by asteroid.
+                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SPACE_SPHERE)){
+            // player was hit by asteroid.
             inGameSoundCrash = createSoundEffect(inGameSoundCrash, R.raw.hit);
             return loseLife();
         }
         else if((hitter.getKind() == Tile.SUPPLY_CRATE && hit.getKind() == Tile.PLAYER) ||
-                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){ // player was hit by crate.
+                (hitter.getKind() == Tile.PLAYER && hit.getKind() == Tile.SUPPLY_CRATE)){
+            // player was hit by crate.
             inGameSoundCollect = createSoundEffect(inGameSoundCollect, R.raw.collect);
             numOfScore++;
 
@@ -416,17 +420,29 @@ public class Game {
 
     private void setNewHighScore(String name) {
         records.set(highScoreIndex,new Record(name,odometer,numOfScore,lat,lon));
+        if(lat==0 && lon==0){
+            // entered here if lat and lon are on default values,
+            // meaning that could not get a location from gps.
+            // or a very VERY small chance that someone is playing in the middle of the ocean.....
+            String toastMSG = "No gps signal or did not get gps permission.";
+            Toast.makeText(context, toastMSG, Toast.LENGTH_LONG).show();
+        }
         Collections.sort(records);
         myDB.setRecords(records);
         myDB.setDB();
     }
 
     private void getGpsFromPlayer() {
-        LocationManager locationManager = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);
-        boolean gotGPSPermission = !(context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED);
+        LocationManager locationManager = (LocationManager)
+                context.getSystemService(context.LOCATION_SERVICE);
+        boolean gotGPSPermission =
+                !(context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                        !=PackageManager.PERMISSION_GRANTED
+                && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED);
         if(gotGPSPermission) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0,
+                    0, new LocationListener() {
                 @Override
                 public void onLocationChanged(@NonNull Location location) {
                    lon = location.getLongitude();
@@ -441,14 +457,15 @@ public class Game {
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            if (ContextCompat.checkSelfPermission(context,
-                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(context,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
             }
             if (ContextCompat.checkSelfPermission(context,
-                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Manifest.permission.ACCESS_COARSE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(context,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
@@ -481,7 +498,8 @@ public class Game {
             mp.release();
         }
         mp = MediaPlayer.create(context, soundEffect);
-        float volume = (float) (1 - (Math.log(MAX_VOLUME - backgroundVolume) / Math.log(MAX_VOLUME)));
+        float volume = (float) (1 - (Math.log(MAX_VOLUME - backgroundVolume) /
+                Math.log(MAX_VOLUME)));
         mp.setVolume(volume,volume);
         mp.start();
         return mp;
@@ -503,21 +521,26 @@ public class Game {
             float intervalX = getInitializedX()-x;
             float lastViewedIntervalX = getLastViewedX()-x;
             float intervalY = getInitializedY()-y;
-            if(intervalX> sensitivity &&  lastViewedIntervalX> sensitivity){ //move right
+            if(intervalX> sensitivity &&  lastViewedIntervalX> sensitivity){
+                //move right
                 movePlayer(false);
                 setLastViewedX(x);
             }
-            else if(intervalX<-sensitivity && lastViewedIntervalX<-sensitivity){ //move left
+            else if(intervalX<-sensitivity && lastViewedIntervalX<-sensitivity){
+                //move left
                 movePlayer(true);
                 setLastViewedX(x);
             }
-            else if(lastViewedIntervalX> sensitivity || lastViewedIntervalX<-sensitivity){ // movement was reset
+            else if(lastViewedIntervalX> sensitivity || lastViewedIntervalX<-sensitivity){
+                // movement was reset
                 setLastViewedX(x);
             }
-            if(intervalY> sensitivity *2){ //make game faster
+            if(intervalY> sensitivity *2){
+                //make game faster
                 setDelay(getDelay()-((int)intervalY)*3);
             }
-            else if(intervalY<-sensitivity *1){ // make game slower
+            else if(intervalY<-sensitivity *1){
+                // make game slower
                 setDelay(getDelay()-((int)intervalY*12));
             }
         }
