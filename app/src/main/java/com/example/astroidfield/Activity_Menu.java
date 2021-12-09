@@ -21,16 +21,13 @@ public class Activity_Menu extends AppCompatActivity {
     private MaterialButton buttonLeaderboards;
     private MaterialButton buttonOptions;
     private MaterialButton buttonExit;
-    private Bundle optionsBundle;
 
-    private MyDB myDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         findViews();
-        setBundle();
 
 
         buttonPlay.setOnClickListener(new View.OnClickListener() {
@@ -44,7 +41,6 @@ public class Activity_Menu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startLeaderboards();
-
             }
         });
 
@@ -71,15 +67,11 @@ public class Activity_Menu extends AppCompatActivity {
 
     private void startGame() {
         Intent myIntent = new Intent(this, Activity_Game.class);
-        if(optionsBundle!=null)
-            myIntent.putExtra(Activity_Options.BUNDLE, optionsBundle);
         startActivity(myIntent);
     }
 
     private void startLeaderboards(){
         Intent myIntent = new Intent(this, Leaderboards_Main.class);
-        if(optionsBundle!=null)
-            myIntent.putExtra(Activity_Options.BUNDLE, optionsBundle);
         startActivity(myIntent);
     }
 
@@ -88,10 +80,5 @@ public class Activity_Menu extends AppCompatActivity {
         buttonLeaderboards = findViewById(R.id.menu_BTN_Leaderboards);
         buttonOptions = findViewById(R.id.menu_BTN_Options);
         buttonExit = findViewById(R.id.menu_BTN_Exit);
-    }
-
-    private void setBundle() {
-        myDB = MyDB.getDB();
-        optionsBundle = myDB.getOptions().createOptionsBundle();
     }
 }

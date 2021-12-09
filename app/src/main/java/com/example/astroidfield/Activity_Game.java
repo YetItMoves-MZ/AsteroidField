@@ -11,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Activity_Game extends AppCompatActivity {
     private Game g;
-    private Bundle b;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +21,7 @@ public class Activity_Game extends AppCompatActivity {
 
         findViews();
 
-        initBundle();
-        g.modifyGameByBundle(b);
+        g.modifyGameByDB();
 
         g.newGame();
 
@@ -48,13 +45,6 @@ public class Activity_Game extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void initBundle() {
-        if(getIntent().hasExtra(Activity_Options.BUNDLE)){
-            b=getIntent().getExtras().getBundle(Activity_Options.BUNDLE);
-        }
-        else b=null;
     }
 
     @Override

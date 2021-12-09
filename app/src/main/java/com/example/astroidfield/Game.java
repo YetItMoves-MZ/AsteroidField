@@ -11,7 +11,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -49,24 +48,16 @@ public class Game {
     private Tile[][] tiles;
     private MySensor mySensor;
 
-    public final float SENSITIVITY = 2;
     private final int MAX_LIVES = 3;
     private final int NUMBER_OF_LANES = 5;
     private final int NUMBER_OF_LAYERS = 8; // player layer = NUMBER_OF_LAYERS -1
     private final static int MAX_VOLUME = 100;
     private final int MAX_DELAY = 700;
     private final int MIN_DELAY = 300;
+    private final int DEFAULT_DELAY = 500;
+    private final float DEFAULT_SENSITIVITY = 5;
     private final int MIN_EASTER_EGG_TIMER = 50;
     private final int MAX_EASTER_EGG_TIMER = 100;
-
-
-    //for bundles
-    public static final String MODE = "MODE";
-    public static final String PLAYER_SKIN = "PLAYER_SKIN";
-    public static final String VOLUME = "VOLUME";
-
-
-
 
     private boolean tiltMode = false;
     private boolean tiltModeInitialized = false;
@@ -74,9 +65,8 @@ public class Game {
     private float initializedY;
     private float lastViewedX;
 
-
-
-    private int delay = 500;
+    private float sensitivity = DEFAULT_SENSITIVITY/2;
+    private int delay = DEFAULT_DELAY;
     private Vibrator v;
     private Activity_Game context;
     private final Handler handler = new Handler();
@@ -162,9 +152,6 @@ public class Game {
         return mySensor;
     }
 
-    public void setMySensor(MySensor mySensor) {
-        this.mySensor = mySensor;
-    }
     public void setLastViewedX(float lastViewedX) {
         this.lastViewedX = lastViewedX;
     }
@@ -477,16 +464,6 @@ public class Game {
         }
     }
 
-    public void modifyGameByBundle(Bundle b) {
-        if(b!=null) {
-            setTiltMode(b.getBoolean(Game.MODE, false));
-            Tile.setCurrentPlayerSkin(b.getInt(Game.PLAYER_SKIN));
-            backgoundVolume = b.getInt(Game.VOLUME);
-        }
-        else
-            setDefaultBundle();
-    }
-
     private void setDefaultBundle() {
         setTiltMode(false);
         Tile.setCurrentPlayerSkin(Tile.DEFAULT_PLAYER_SKIN);
@@ -526,24 +503,23 @@ public class Game {
             float intervalX = getInitializedX()-x;
             float lastViewedIntervalX = getLastViewedX()-x;
             float intervalY = getInitializedY()-y;
-            if(intervalX>SENSITIVITY &&  lastViewedIntervalX>SENSITIVITY){ //move right
+            if(intervalX> sensitivity &&  lastViewedIntervalX> sensitivity){ //move right
                 movePlayer(false);
                 setLastViewedX(x);
             }
-            else if(intervalX<-SENSITIVITY && lastViewedIntervalX<-SENSITIVITY){ //move left
+            else if(intervalX<-sensitivity && lastViewedIntervalX<-sensitivity){ //move left
                 movePlayer(true);
                 setLastViewedX(x);
             }
-            else if(lastViewedIntervalX>SENSITIVITY || lastViewedIntervalX<-SENSITIVITY){ // movement was reset
+            else if(lastViewedIntervalX> sensitivity || lastViewedIntervalX<-sensitivity){ // movement was reset
                 setLastViewedX(x);
             }
-            if(intervalY>SENSITIVITY*2){ //make game faster
+            if(intervalY> sensitivity *2){ //make game faster
                 setDelay(getDelay()-((int)intervalY)*3);
             }
-            else if(intervalY<-SENSITIVITY*1){ // make game slower
+            else if(intervalY<-sensitivity *1){ // make game slower
                 setDelay(getDelay()-((int)intervalY*12));
             }
-
         }
         else{
             setInitializedX(x);
@@ -553,4 +529,15 @@ public class Game {
         }
     }
 
+    public void modifyGameByDB() {
+        Options options = myDB.getOptions();
+
+        // 1 = 300(slow), 2 = 500(medium) , 3 = 700(fast)
+        delay = (4-options.getGameSpeed())*200 + 100;
+        // don't want to change it too much.
+        sensitivity = (11-options.getSensitivity()) / 2;
+        backgoundVolume = options.getVolume();
+        Tile.setCurrentPlayerSkin(options.getPlayerSkinIndex());
+        tiltMode=options.isGameModeTilt();
+    }
 }

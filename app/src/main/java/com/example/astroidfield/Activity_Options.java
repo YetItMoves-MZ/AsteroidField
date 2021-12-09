@@ -19,8 +19,6 @@ public class Activity_Options extends AppCompatActivity {
 
     public static final String BUNDLE = "Bundle";
 
-
-
     //bundle variables
     private boolean gameModeTilt;
     private int playerSkinIndex;
@@ -37,7 +35,7 @@ public class Activity_Options extends AppCompatActivity {
     int sensitivitySeekBarMin = 1;
     int gameSpeedSeekBarStep = 1;
     int gameSpeedSeekBarMax = 3;
-    int gameSpeedSeekBarMin = 0;
+    int gameSpeedSeekBarMin = 1;
 
     //views
     private Switch tiltMode;
@@ -63,8 +61,10 @@ public class Activity_Options extends AppCompatActivity {
         findViews();
         getDatabaseFromJson();
         setViews();
+        setListeners();
+    }
 
-
+    private void setListeners() {
         buttonExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,10 +79,8 @@ public class Activity_Options extends AppCompatActivity {
                 {
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {}
-
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) {}
-
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress,
                                                   boolean fromUser)
@@ -97,29 +95,36 @@ public class Activity_Options extends AppCompatActivity {
         sbGameSpeed.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
                     @Override
-                    public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                        gameSpeed = gameSpeedSeekBarMin + (progress * gameSpeedSeekBarStep);
+                        gameSpeedText.setText("Game Speed: " + gameSpeedToText(gameSpeed));
                     }
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) { }
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) { }
+                });
 
+        sbSensitivity.setMax((sensitivitySeekBarMax - sensitivitySeekBarMin) /
+                sensitivitySeekBarStep);
+        sbSensitivity.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                        sensitivity = sensitivitySeekBarMin + (progress * sensitivitySeekBarStep);
+                        sensitivityText.setText("Sensitivity: " + sensitivity);
+                    }
                     @Override
                     public void onStartTrackingTouch(SeekBar seekBar) {
 
                     }
-
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
 
                     }
-                });
+                }
+        );
 
-                sbSensitivity.setMax((sensitivitySeekBarMax - sensitivitySeekBarMin) /
-                        sensitivitySeekBarStep);
-        sbSensitivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
         tiltMode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -144,7 +149,19 @@ public class Activity_Options extends AppCompatActivity {
             }
 
         });
+    }
 
+    private String gameSpeedToText(int gameSpeed) {
+        switch(gameSpeed){
+            case 1:
+                return "slow";
+            case 2:
+                return "medium";
+            case 3:
+                return "fast";
+            default:
+                return "";
+        }
     }
 
     private void setViews() {
@@ -156,21 +173,7 @@ public class Activity_Options extends AppCompatActivity {
         musicVolumeText.setText("Music Volume: " + volume);
 
         sbGameSpeed.setProgress(gameSpeed);
-        String stringGameSpeed;
-        switch (gameSpeed){
-            case 1:
-                stringGameSpeed = "slow";
-                break;
-            case 2:
-                stringGameSpeed = "medium";
-                break;
-            case 3:
-                stringGameSpeed = "fast";
-                break;
-            default:
-                stringGameSpeed = "";
-        }
-        gameSpeedText.setText("GameSpeed: " + stringGameSpeed);
+        gameSpeedText.setText("GameSpeed: " + gameSpeedToText(gameSpeed));
 
         sbSensitivity.setProgress(sensitivity);
         sensitivityText.setText("Sensitivity: " + sensitivity);
@@ -182,6 +185,8 @@ public class Activity_Options extends AppCompatActivity {
         gameModeTilt = options.isGameModeTilt();
         playerSkinIndex = options.getPlayerSkinIndex();
         volume = options.getVolume();
+        gameSpeed = options.getGameSpeed();
+        sensitivity = options.getSensitivity();
     }
 
     private void setPlayerSkin(boolean pressedLeft) {
@@ -211,6 +216,8 @@ public class Activity_Options extends AppCompatActivity {
         options.setGameModeTilt(gameModeTilt);
         options.setVolume(volume);
         options.setPlayerSkinIndex(playerSkinIndex);
+        options.setSensitivity(sensitivity);
+        options.setGameSpeed(gameSpeed);
         myDB.setOptions(options);
         myDB.setDB();
     }
