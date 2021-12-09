@@ -46,6 +46,8 @@ public class Game {
     private Tile[][] tiles;
     private MySensor mySensor;
 
+
+    // finals
     private final int MAX_LIVES = 3;
     private final int NUMBER_OF_LANES = 5;
     private final int NUMBER_OF_LAYERS = 8; // player layer = NUMBER_OF_LAYERS -1
@@ -57,8 +59,11 @@ public class Game {
     private final int MIN_EASTER_EGG_TIMER = 50;
     private final int MAX_EASTER_EGG_TIMER = 100;
 
+    // tilt mode
     private boolean tiltMode = false;
     private boolean tiltModeInitialized = false;
+
+    // sensors
     private float initializedX;
     private float initializedY;
     private float lastViewedX;
@@ -248,7 +253,7 @@ public class Game {
         }
     }
 
-    public void startTicker() {
+    private void startTicker() {
         getHandler().postDelayed(getRunnable(), delay);
     }
     public void stopTicker() {
@@ -505,15 +510,22 @@ public class Game {
         return mp;
     }
 
-    //TODO: move everything from activity game to here
     public void onResume() {
         if(soundBackgroundMusic!=null) {
             soundBackgroundMusic.start();
+        }
+        startTicker();
+        if(tiltMode) {
+            mySensor.resumeSensor();
         }
     }
 
     public void onPause() {
         soundBackgroundMusic.pause();
+        stopTicker();
+        if(tiltMode){
+            mySensor.pauseSensor();
+        }
     }
 
     public void movementWithTilt(float x, float y) {

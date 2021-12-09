@@ -22,9 +22,24 @@ public class Activity_Game extends AppCompatActivity {
         findViews();
 
         g.modifyGameByDB();
-
         g.newGame();
+        setListeners();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        g.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        g.onPause();
+    }
+
+    private void setListeners() {
         g.getButtonLeft().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,26 +60,6 @@ public class Activity_Game extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        g.onResume();
-        g.startTicker();
-        if(g.getTiltMode()) {
-            g.getMySensor().resumeSensor();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        g.onPause();
-        g.stopTicker();
-        if(g.getTiltMode()){
-            g.getMySensor().pauseSensor();
-        }
     }
 
     private void findViews(){
