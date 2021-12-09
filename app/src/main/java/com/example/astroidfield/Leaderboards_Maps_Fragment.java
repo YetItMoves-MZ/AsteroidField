@@ -50,7 +50,8 @@ public class Leaderboards_Maps_Fragment extends Fragment {
                         googleMap.clear();
                     }
                     LatLng latlng = new LatLng(lat, lon);
-                    googleMap.addMarker(new MarkerOptions().position(latlng).title(name + " played here"));
+                    googleMap.addMarker(new MarkerOptions().position(latlng).
+                            title(name + " played here"));
                     googleMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
                 }
             };

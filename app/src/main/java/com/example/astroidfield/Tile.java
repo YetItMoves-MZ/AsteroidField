@@ -1,11 +1,6 @@
 package com.example.astroidfield;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,7 +16,8 @@ public class Tile {
 
 
     private static int currentPlayerSkin;
-    public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2, SUPPLY_CRATE = 3, SPACE_SPHERE = 4;
+    public static final int EMPTY = 0, PLAYER = 1 , ASTEROID = 2,
+            SUPPLY_CRATE = 3, SPACE_SPHERE = 4;
     public static final int DEFAULT_PLAYER_SKIN = 0;
     public static final int PLAYER_SKIN_ARRAY_SIZE = 9;
     public static final int[] PLAYER_SKIN_ARRAY = {

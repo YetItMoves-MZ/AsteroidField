@@ -3,25 +3,26 @@ package com.example.astroidfield;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class MSPV3 {
+public class mySharedPreferences {
     private final String SP_FILE = "SP_FILE";
 
 
 
-    private static MSPV3 me;
+    private static mySharedPreferences me;
     private SharedPreferences sharedPreferences;
 
-    public static MSPV3 getMe() {
+    public static mySharedPreferences getMe() {
         return me;
     }
 
-    private MSPV3(Context context) {
-        sharedPreferences = context.getApplicationContext().getSharedPreferences(SP_FILE, Context.MODE_PRIVATE);
+    private mySharedPreferences(Context context) {
+        sharedPreferences = context.getApplicationContext().getSharedPreferences(SP_FILE,
+                Context.MODE_PRIVATE);
     }
 
-    public static MSPV3 initHelper(Context context) {
+    public static mySharedPreferences initHelper(Context context) {
         if (me == null) {
-            me = new MSPV3(context);
+            me = new mySharedPreferences(context);
         }
         return me;
     }

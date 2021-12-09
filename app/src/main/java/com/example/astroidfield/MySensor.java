@@ -38,7 +38,8 @@ public class MySensor {
     }
 
     public void resumeSensor(){
-        sensorManager.registerListener(accSensorEventListener, accSensor, SensorManager.SENSOR_DELAY_UI);
+        sensorManager.registerListener(accSensorEventListener, accSensor,
+                SensorManager.SENSOR_DELAY_UI);
     }
 
 }
