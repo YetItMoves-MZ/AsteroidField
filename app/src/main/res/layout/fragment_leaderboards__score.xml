@@ -10,6 +10,7 @@
         android:layout_height="match_parent">
 
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_0"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -41,12 +42,11 @@
                 android:layout_weight="0.3"
                 android:visibility="invisible"/>
 
-
-
         </TableRow>
 
 
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -71,17 +71,17 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap1"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
 
-
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -106,16 +106,17 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap2"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
 
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -140,16 +141,17 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap3"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
 
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -174,16 +176,17 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap4"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
 
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_5"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -208,16 +211,17 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap5"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
 
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_6"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -242,15 +246,16 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap6"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_7"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -275,15 +280,16 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap7"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_8"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -308,15 +314,16 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap8"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_9"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -341,15 +348,16 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap9"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
         <TableRow
+            android:id="@+id/leaderboards_score_TABLE_10"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1" >
@@ -374,12 +382,12 @@
                 android:text="TextView"
                 android:layout_weight="1"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/leaderboards_score_BTN_ShowOnMap10"
-                android:layout_width="wrap_content"
+                android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.3"
-                android:text="Button" />
+                android:layout_weight="0.1"
+                android:background="@drawable/ic_map_marker" />
 
         </TableRow>
     </TableLayout>

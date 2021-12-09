@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,10 +19,11 @@ public class Leaderboards_Score_Fragment extends Fragment {
 
     public static final int LEADERBOARDS_SIZE = 10;
 
+    private TableRow tableRows[];
     private TextView names[];
     private TextView scores[];
     private TextView odometers[];
-    private Button showLocations[];
+    private ImageButton showLocations[];
     private double lons[] = new double[LEADERBOARDS_SIZE];
     private double lats[] = new double[LEADERBOARDS_SIZE];
     private String stringName[] = new String[LEADERBOARDS_SIZE];
@@ -54,14 +56,18 @@ public class Leaderboards_Score_Fragment extends Fragment {
 
     private void setScores(ArrayList<Record> records) {
         for(int i=0; i<LEADERBOARDS_SIZE;i++){
-            Record record = records.get(i);
-            stringName[i] = record.getName();
-            names[i].setText(stringName[i]);
-            scores[i].setText(""+record.getScore());
-            odometers[i].setText(""+record.getOdometer());
-            lons[i] = record.getLon();
-            lats[i] = record.getLat();
-
+            if(records.get(i).getScore()<0){
+                tableRows[i].setVisibility(View.INVISIBLE);
+            }
+            else{
+                Record record = records.get(i);
+                stringName[i] = record.getName();
+                names[i].setText(stringName[i]);
+                scores[i].setText(""+record.getScore());
+                odometers[i].setText(""+record.getOdometer());
+                lons[i] = record.getLon();
+                lats[i] = record.getLat();
+            }
         }
     }
     private void sendLocation(double lon, double lat, String name) {
@@ -134,6 +140,19 @@ public class Leaderboards_Score_Fragment extends Fragment {
 
     }
     private void findViews(View view) {
+        tableRows = new TableRow[]{
+                view.findViewById(R.id.leaderboards_score_TABLE_1),
+                view.findViewById(R.id.leaderboards_score_TABLE_2),
+                view.findViewById(R.id.leaderboards_score_TABLE_3),
+                view.findViewById(R.id.leaderboards_score_TABLE_4),
+                view.findViewById(R.id.leaderboards_score_TABLE_5),
+                view.findViewById(R.id.leaderboards_score_TABLE_6),
+                view.findViewById(R.id.leaderboards_score_TABLE_7),
+                view.findViewById(R.id.leaderboards_score_TABLE_8),
+                view.findViewById(R.id.leaderboards_score_TABLE_9),
+                view.findViewById(R.id.leaderboards_score_TABLE_10)
+        };
+
         names = new TextView[]{
                 view.findViewById(R.id.leaderboards_score_TXT_name1),
                 view.findViewById(R.id.leaderboards_score_TXT_name2),
@@ -173,7 +192,7 @@ public class Leaderboards_Score_Fragment extends Fragment {
                 view.findViewById(R.id.leaderboards_score_TXT_odometer10)
 
         };
-        showLocations = new Button[]{
+        showLocations = new ImageButton[]{
                 view.findViewById(R.id.leaderboards_score_BTN_ShowOnMap1),
                 view.findViewById(R.id.leaderboards_score_BTN_ShowOnMap2),
                 view.findViewById(R.id.leaderboards_score_BTN_ShowOnMap3),

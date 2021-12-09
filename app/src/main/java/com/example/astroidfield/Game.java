@@ -77,7 +77,7 @@ public class Game {
     private boolean newAsteroid = true;
     private int odometer=0;
     private int numOfScore =0;
-    private int backgoundVolume = 50;
+    private int backgroundVolume = 50;
     private String  name = null;
     private MyDB myDB =  MyDB.getDB();
     private ArrayList<Record> records = myDB.getRecords();
@@ -481,7 +481,7 @@ public class Game {
             mp.release();
         }
         mp = MediaPlayer.create(context, soundEffect);
-        float volume = (float) (1 - (Math.log(MAX_VOLUME - backgoundVolume) / Math.log(MAX_VOLUME)));
+        float volume = (float) (1 - (Math.log(MAX_VOLUME - backgroundVolume) / Math.log(MAX_VOLUME)));
         mp.setVolume(volume,volume);
         mp.start();
         return mp;
@@ -536,7 +536,7 @@ public class Game {
         delay = (4-options.getGameSpeed())*200 + 100;
         // don't want to change it too much.
         sensitivity = (11-options.getSensitivity()) / 2;
-        backgoundVolume = options.getVolume();
+        backgroundVolume = options.getVolume();
         Tile.setCurrentPlayerSkin(options.getPlayerSkinIndex());
         tiltMode=options.isGameModeTilt();
     }

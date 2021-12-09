@@ -8,13 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
 
-
-/*
-What needs to be done:
-menu with options:
-    TODO: change sensitivity for tilt mode                              update 2
- */
-
 public class Activity_Menu extends AppCompatActivity {
 
     private MaterialButton buttonPlay;

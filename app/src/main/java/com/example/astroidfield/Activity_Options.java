@@ -169,13 +169,13 @@ public class Activity_Options extends AppCompatActivity {
 
         tiltMode.setChecked(gameModeTilt);
 
-        musicVolume.setProgress(volume);
+        musicVolume.setProgress((volume - musicSeekBarMin) / musicSeekBarStep);
         musicVolumeText.setText("Music Volume: " + volume);
 
-        sbGameSpeed.setProgress(gameSpeed);
-        gameSpeedText.setText("GameSpeed: " + gameSpeedToText(gameSpeed));
+        sbGameSpeed.setProgress((gameSpeed - gameSpeedSeekBarMin) / gameSpeedSeekBarStep);
+        gameSpeedText.setText("Game Speed: " + gameSpeedToText(gameSpeed));
 
-        sbSensitivity.setProgress(sensitivity);
+        sbSensitivity.setProgress((sensitivity - sensitivitySeekBarMin) / sensitivitySeekBarStep);
         sensitivityText.setText("Sensitivity: " + sensitivity);
     }
 
