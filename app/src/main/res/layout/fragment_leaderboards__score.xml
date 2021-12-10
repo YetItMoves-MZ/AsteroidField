@@ -21,18 +21,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Score"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Traveled"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_invisible"
@@ -57,18 +60,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -92,18 +98,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -127,18 +136,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -162,18 +174,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -197,18 +212,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -232,18 +250,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -266,18 +287,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -300,18 +324,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -334,18 +361,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton
@@ -368,18 +398,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_score10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
             <TextView
                 android:id="@+id/leaderboards_score_TXT_odometer10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="#00FFFF"
                 android:layout_weight="1"/>
 
             <ImageButton

@@ -23,11 +23,11 @@ public class Leaderboards_Main extends AppCompatActivity {
         fragmentScores = new Leaderboards_Score_Fragment();
         fragmentScores.setActivity(this);
         fragmentScores.setCallBackMap(callBackMap);
-        getSupportFragmentManager().beginTransaction().add(R.id.frame1, fragmentScores).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.leaderboards_frame1, fragmentScores).commit();
 
         fragmentMap = new Leaderboards_Maps_Fragment();
         fragmentMap.setActivity(this);
-        getSupportFragmentManager().beginTransaction().add(R.id.frame2, fragmentMap).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.leaderboards_frame2, fragmentMap).commit();
 
 
 

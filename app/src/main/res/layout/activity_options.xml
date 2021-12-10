@@ -8,6 +8,14 @@
     tools:context=".Activity_Options"
     android:keepScreenOn="true">
 
+    <ImageView
+        android:id="@+id/options_IMG_backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_space_4"/>
+
     <SeekBar
         android:id="@+id/options_SEEKBAR_background_sensitivity"
         android:layout_width="wrap_content"
@@ -24,7 +32,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Sensetivity: 5"
+        android:text="Sensitivity: 5"
+        android:textColor="#00FFFF"
         app:layout_constraintEnd_toEndOf="@+id/options_SEEKBAR_background_volume"
         app:layout_constraintStart_toStartOf="@+id/options_SEEKBAR_background_volume"
         app:layout_constraintTop_toBottomOf="@+id/options_SWITCH_TiltMode" />
@@ -34,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Game Speed: medium"
+        android:textColor="#00FFFF"
         app:layout_constraintBottom_toTopOf="@+id/options_SEEKBAR_background_gameSpeed"
         app:layout_constraintEnd_toEndOf="@+id/options_SEEKBAR_background_gameSpeed"
         app:layout_constraintStart_toStartOf="@+id/options_SEEKBAR_background_gameSpeed" />
@@ -48,17 +58,24 @@
         android:progress="2"
         app:layout_constraintBottom_toTopOf="@+id/options_TEXTVIEW_text_volume"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/options_BTN_Exit"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_marginBottom="100dp"
-        android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+
+        android:text="Back"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="#00FFFF"
+        app:backgroundTint="#0E0A0A"
+        android:textColor="#00FFFF"/>
 
     <Switch
         android:id="@+id/options_SWITCH_TiltMode"
@@ -66,6 +83,7 @@
         android:layout_height="26dp"
         android:layout_marginBottom="50dp"
         android:text="Tilt Mode"
+        android:textColor="#00FFFF"
         app:layout_constraintBottom_toTopOf="@+id/options_BTN_Exit"
         app:layout_constraintEnd_toEndOf="@+id/options_BTN_Exit"
         app:layout_constraintStart_toStartOf="@+id/options_BTN_Exit"
@@ -109,6 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:text="Player Skin"
+        android:textColor="#00FFFF"
         app:layout_constraintBottom_toTopOf="@+id/options_IMAGE_player"
         app:layout_constraintEnd_toEndOf="@+id/options_IMAGE_player"
         app:layout_constraintStart_toStartOf="@+id/options_IMAGE_player" />
@@ -130,6 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Music Volume: 50"
+        android:textColor="#00FFFF"
         app:layout_constraintBottom_toTopOf="@+id/options_SEEKBAR_background_volume"
         app:layout_constraintEnd_toEndOf="@+id/options_SEEKBAR_background_volume"
         app:layout_constraintStart_toStartOf="@+id/options_SEEKBAR_background_volume" />

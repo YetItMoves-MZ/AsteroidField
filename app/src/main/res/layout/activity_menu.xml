@@ -8,46 +8,82 @@
     tools:context=".Activity_Menu"
     android:keepScreenOn="true">
 
+    <ImageView
+        android:id="@+id/menu_IMG_backgroundImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background_space_1"/>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu_BTN_Leaderboards"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:text="Leaderboards"
         app:layout_constraintEnd_toEndOf="@+id/menu_BTN_Options"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/menu_BTN_Options"
-        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Options" />
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Options"
+
+        android:text="Leaderboards"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="#00FFFF"
+        app:backgroundTint="#0E0A0A"
+        android:textColor="#00FFFF"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu_BTN_Exit"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:text="Exit"
         app:layout_constraintEnd_toEndOf="@+id/menu_BTN_Leaderboards"
         app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toStartOf="@+id/menu_BTN_Leaderboards"
-        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Leaderboards" />
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Leaderboards"
+
+        android:text="Exit"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="#00FFFF"
+        app:backgroundTint="#0E0A0A"
+        android:textColor="#00FFFF"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu_BTN_Play"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_marginTop="50dp"
-        android:text="Play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:text="Play"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="#00FFFF"
+        app:backgroundTint="#0E0A0A"
+        android:textColor="#00FFFF"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu_BTN_Options"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_marginTop="40dp"
-        android:text="Options"
         app:layout_constraintEnd_toEndOf="@+id/menu_BTN_Play"
         app:layout_constraintStart_toStartOf="@+id/menu_BTN_Play"
-        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Play" />
+        app:layout_constraintTop_toBottomOf="@+id/menu_BTN_Play"
+
+        android:text="Options"
+
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:cornerRadius="50dp"
+        app:strokeColor="#00FFFF"
+        app:backgroundTint="#0E0A0A"
+        android:textColor="#00FFFF"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
